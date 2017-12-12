@@ -41,3 +41,11 @@ module.exports.deleteMessages = () => {
 module.exports.toggleStyle = () => {
 
 };
+
+module.exports.disableClearMessages = () => {
+    document.getElementById("clear-button").classList.add("disabled")
+};
+
+module.exports.enableClearMessages = () => {
+    document.getElementById("clear-button").classList.remove("disabled");
+};

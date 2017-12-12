@@ -5,19 +5,27 @@ const model = require("./model");
 const inputBox = document.getElementById("input-box");
 const messageContainer = document.getElementById("message-container");
 const clearButton = document.getElementById("clear-button");
+const sendButton = document.getElementById("send-button");
+
+
+let user = "Joe";
 
 inputBox.addEventListener("keyup", function(event) {
     if(event.keyCode === 13){
-        //this variable can hold the message text and pass it into the functions
-        let brandNewMessage = inputBox.value;
-
-        // execute printMessagetoDOM function
-        // DONT FORGET TO MAKE IT view.printMessages
-
-        // execute saveMessagetoJSON function
-        // DONT FORGET TO MAKE IT model.saveMessage
+        saveNewMessage();
     }
 });
+
+sendButton.addEventListener("click", function(event) {
+        saveNewMessage();
+});
+
+const saveNewMessage = () => {
+    let brandNewMessage = inputBox.value;
+    view.printMessage(model.createMessage(brandNewMessage, user));
+    inputBox.value = "";
+    checkClearButton();
+};
 
 
 messageContainer.addEventListener("click", function(event){
@@ -29,23 +37,16 @@ messageContainer.addEventListener("click", function(event){
 
         // execute deleteMessageFromJSON function
         // model.clearMessages
+        checkClearButton();
     }
 });
 
 // CLEAR BUTTON
-clearButton.addEventListener("click", function(event) {
-    if(totalMessages = document.getElementsByClassName("messageCard")){
-        // gather all message cards from the page, and then delete them all from the DOM and the JSON file
-        for(let i = 0; i < totalMessages.length; i++){
-            // run the deleteMessageFromDOM function on each message
-            // view.deleteMessage
-
-            // run the deleteMessageFromJSON function on each message
-            // model.deleteMessage
-        }
-    }else {
-        // run function that grays out the clear button
-
+clearButton.addEventListener("click", () => {
+    let totalMessages = document.getElementsByClassName("message-card");
+    if(totalMessages !== undefined && !clearButton.classList.contains("disabled")){
+        view.deleteMessages();
+        checkClearButton();
     }
 });
 
@@ -55,8 +56,27 @@ module.exports.loadMessages = function(){
         view.printMessages(messages, 20);
     }); // might be a different function name
     // send those messages to the output function to print them to the DOM
+    checkClearButton();
 };
 
+const checkClearButton = () => {
+    // console.log(areMessages());
+    // if(areMessages() === true){
+    //     view.enableClearMessages();
+    // } else {
+    //     view.disableClearMessages();
+    // }
+};
+
+const areMessages = () => {
+    let messages = document.getElementsByClassName("message-card");
+    console.log(messages);
+    if(messages.length > 0){
+        return true;
+    } else {
+        return false;
+    }
+};
 
 // const darkThemeCheckbox = document.getElementById("dark-theme-checkbox");
 // // darkThemeCheckbox.addEventListener("");

@@ -47,19 +47,20 @@ module.exports.loadJSON = () => {
 };
 
 
-function createMessage(text, username){
+module.exports.createMessage = (text, userName) => {
     let numberOfMessages = savedMessages.length;
     let currentMessageIndex = numberOfMessages + 1;
     let newMessage = {
         id: currentMessageIndex,
         text: text,
-        username: username,
+        userName: userName,
         timestamp: Date.now()
     };
     savedMessages.push(newMessage);
+    return newMessage;
 }
 
-createMessage("Jordan", "Hello");
+// createMessage("Jordan", "Hello");
 
 module.exports.deleteMessage = (messageID) => {
     for (let i = 0; i < savedMessages.length; i++){
