@@ -22,6 +22,19 @@ let savedMessages = [
 
 ];
 
+module.exports.messageBuilder = (id, userName, text, timestamp) => {
+    /* jshint ignore:start */
+    this.id = id;
+    this.userName = userName;
+    this.text = text;
+    this.timeStamp = timestamp;
+    /* jshint ignore:end */
+};
+
+// example of creating new message
+// let newMessage = new messageBuilder('04', 'Jordan', 'Howdy', 'timestamp');
+// saveMessage(newMessage);
+
 module.exports.returnSavedMessages = () => {
     return savedMessages;
 };
@@ -37,7 +50,7 @@ module.exports.loadJSON = () => {
 };
 
 module.exports.saveMessage = (message) => {
-    message.push(savedMessages);
+    savedMessages.push(message);
 };
 
 
