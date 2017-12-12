@@ -22,18 +22,15 @@ let savedMessages = [
 
 ];
 
-module.exports.messageBuilder = (id, userName, text, timestamp) => {
-    /* jshint ignore:start */
-    this.id = id;
-    this.userName = userName;
-    this.text = text;
-    this.timeStamp = timestamp;
-    /* jshint ignore:end */
-};
+// function messageBuilder (id, userName, text, timestamp){
+//     /* jshint ignore:start */
+//     this.id = id;
+//     this.userName = userName;
+//     this.text = text;
+//     this.timeStamp = timestamp;
+//     /* jshint ignore:end */
+// }
 
-// example of creating new message
-// let newMessage = new messageBuilder('04', 'Jordan', 'Howdy', 'timestamp');
-// saveMessage(newMessage);
 
 module.exports.returnSavedMessages = () => {
     return savedMessages;
@@ -49,10 +46,20 @@ module.exports.loadJSON = () => {
     });
 };
 
-module.exports.saveMessage = (message) => {
-    savedMessages.push(message);
-};
 
+function createMessage(text, username){
+    let numberOfMessages = savedMessages.length;
+    let currentMessageIndex = numberOfMessages + 1;
+    let newMessage = {
+        id: currentMessageIndex,
+        text: text,
+        username: username,
+        timestamp: Date.now()
+    };
+    savedMessages.push(newMessage);
+}
+
+createMessage("Jordan", "Hello");
 
 module.exports.deleteMessage = (messageID) => {
     for (let i = 0; i < savedMessages.length; i++){

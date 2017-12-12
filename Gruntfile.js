@@ -22,7 +22,7 @@ module.exports = function (grunt) {
         }, 
         watch: {
             javascripts: {
-                files: ["javascripts/**/*.js", "javascripts/**/*.json"],
+                files: ["scipts/**/*.js", "scripts/**/*.json"],
                 tasks: ["jshint", "browserify", "sass"]
             },
         }
