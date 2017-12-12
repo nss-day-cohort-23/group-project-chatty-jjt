@@ -39,7 +39,7 @@ module.exports.returnSavedMessages = () => {
 module.exports.loadJSON = () => {
     return new Promise(function (resolve, reject){
         let request = new XMLHttpRequest();
-        request.addEventListener("load", () => {resolve(JSON.parse(request.responseText));});
+        request.addEventListener("load", () => {resolve(JSON.parse(request.responseText).messages);});
         request.addEventListener("error", () => {console.log("The files weren't loaded correctly!");});
         request.open("GET", 'json/messages.json');
         request.send();

@@ -1,5 +1,5 @@
 "use strict";
-require("./controller");
+const controller = require("./controller");
 
-loadMessages();
+controller.loadMessages();
 

@@ -51,17 +51,18 @@ clearButton.addEventListener("click", function(event) {
 
 module.exports.loadMessages = function(){
     // gather messages from the JSON file and asign them to a variable
-    let allMessages = model.loadJSON(); // might be a different function name
+    let allMessages = model.loadJSON().then(messages => {
+        view.printMessages(messages, 20);
+    }); // might be a different function name
     // send those messages to the output function to print them to the DOM
-    view.outputMessages(allMessages); // might be a different function name
 };
 
 
-const darkThemeCheckbox = document.getElementById("dark-theme-checkbox");
-// darkThemeCheckbox.addEventListener("");
-darkThemeCheckbox.addEventListener("change", function(darkThemeCheckbox){
+// const darkThemeCheckbox = document.getElementById("dark-theme-checkbox");
+// // darkThemeCheckbox.addEventListener("");
+// darkThemeCheckbox.addEventListener("change", function(darkThemeCheckbox){
     
-        // call some function that toggles css classes to TURN OFF/ON dark theme
-        // view.toggleStyle();
+//         // call some function that toggles css classes to TURN OFF/ON dark theme
+//         // view.toggleStyle();
     
-});
+// });

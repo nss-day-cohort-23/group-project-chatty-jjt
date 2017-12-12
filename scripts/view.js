@@ -13,7 +13,6 @@ module.exports.printMessage = (message) => {
 
     paragraph.appendChild(userNameTextNode);
     paragraph.appendChild(contentTextNode);
-    
 
     messageDiv.appendChild(paragraph);
 
@@ -21,8 +20,9 @@ module.exports.printMessage = (message) => {
 };
 
 module.exports.printMessages = (messages, ammount) => {
-    for( let i = 0; i < ammount; i++){
-        this.printMessage(messages[i]);
+    ammount = ammount > messages.length ? messages.length : ammount;
+    for(let i = 0; i < ammount; i++){
+            this.printMessage(messages[i]);
     }
 };
 
