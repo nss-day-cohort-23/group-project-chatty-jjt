@@ -2,3 +2,4 @@
 require("./controller");
 
 loadMessages();
+
