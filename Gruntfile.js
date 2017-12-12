@@ -13,7 +13,13 @@ module.exports = function (grunt) {
                 browserify: true
             }
         },
-       
+        sass: {
+            dist: {
+                files: {
+                    'css/main.css': 'sass/style.scss'
+                }
+            }
+        }, 
         watch: {
             javascripts: {
                 files: ["javascripts/**/*.js", "javascripts/**/*.json"],
@@ -26,5 +32,5 @@ module.exports = function (grunt) {
         .filter("grunt-*")
         .forEach(grunt.loadNpmTasks);
 
-    grunt.registerTask("default", ['jshint', 'browserify', 'watch']);
+    grunt.registerTask("default", ['jshint', 'sass', 'browserify', 'watch']);
 };
