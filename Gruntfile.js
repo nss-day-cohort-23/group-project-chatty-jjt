@@ -1,13 +1,11 @@
-module.exports = function (grunt) {
+module.exports = function(grunt){
+    
     grunt.initConfig({
-        browserify: {
-            'dist/bundle.js': ['scripts/main.js']
-        },
         jshint: {
-            files: ["scripts/**/*.js", "scripts/**/*.json"],
+            files: ['js/**/*.js'],
             options: {
-                predef: ["document", "console", "this"],
-                esnext: true,
+                predef: ["document", "console", "$", "alert"],//Ignore these even though we haven't defined them
+                esnext: true, //Telling to use latest version of javascript
                 globalstrict: true,
                 globals: {},
                 browserify: true
@@ -22,15 +20,22 @@ module.exports = function (grunt) {
         }, 
         watch: {
             javascripts: {
-                files: ["scipts/**/*.js", "scripts/**/*.json"],
-                tasks: ["jshint", "browserify", "sass"]
+
+                files: ['scripts/**/*.js'],
+                tasks: ['jshint', 'browserify']
             },
+            sass: {
+                files: ['sass/**/*.scss'],
+                tasks: ['sass']
+            }
+        },
+        browserify: {
+            'dist/bundle.js': ['scripts/main.js']
         }
     });
 
-    require("matchdep")
-        .filter("grunt-*")
-        .forEach(grunt.loadNpmTasks);
+    require("matchdep").filter("grunt-*").forEach(grunt.loadNpmTasks);
 
-    grunt.registerTask("default", ['jshint', 'sass', 'browserify', 'watch']);
-};
+    grunt.registerTask("default", ['jshint', 'sass', 'browserify', 'watch']);//Will do by default when you excecute grunt.
+//'jshint',
+}

@@ -1,6 +1,5 @@
-'use strict';
+"use strict";
+require("./controller");
 
-const model = require("./model.js");
+loadMessages();
 
-let savedMessages = model.returnSavedMessages();
-console.log("saved messages", savedMessages);
