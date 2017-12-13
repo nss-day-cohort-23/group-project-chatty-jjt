@@ -8,6 +8,7 @@ const inputBox = document.getElementById("input-box");
 const messageContainer = document.getElementById("message-container");
 const clearButton = document.getElementById("clear-button");
 const sendButton = document.getElementById("send-button");
+const fontSizeSlider = document.getElementById("font-size-slider");
 const theme = document.getElementById("theme-dropup");
 const body = document.getElementById("body");
 const signOut = document.getElementById("signOut");
@@ -54,8 +55,15 @@ sendButton.addEventListener("click", function(event) {
 
 const saveNewMessage = () => {
     let brandNewMessage = inputBox.value;
-    view.printMessage(model.createMessage(brandNewMessage, user));
-    inputBox.value = "";
+    if(brandNewMessage.length === 0){
+        // document.getElementById("empty-validation").toggle();
+        console.log("empty");
+    }else{
+        view.printMessage(model.createMessage(brandNewMessage, user));
+        inputBox.value = "";
+    }
+    // messageContainer.scrollTop = messageContainer.sc;
+
 };
 
 
@@ -92,8 +100,11 @@ module.exports.loadMessages = function(){
     //view.setUser(user);
         view.printMessages(messages, 20);
         checkClearButton();
+        
     }); // might be a different function name
     // send those messages to the output function to print them to the DOM
+    // messageContainer.scrollTop = messageContainer.scrollHeight;
+
 };
 
 
@@ -123,6 +134,26 @@ const areMessages = () => {
     
 // });
 
+
+fontSizeSlider.addEventListener("change", () => {
+    let selectedFontSize = fontSizeSlider.value;
+    let fontSizeClass = `font-size-${selectedFontSize}`;
+    let classListSearchString = /font-size-[0-9]/;
+    let messageCards = document.getElementsByClassName("message-card");
+    [...messageCards].forEach(element => {
+        let classList = element.classList;
+        classList.add(fontSizeClass);
+        [...classList].forEach(className => {
+            if (/font-size-[0-9]/.test(className)){
+                console.log("We're inside the true statement");
+                classList.remove(className);
+                classList.add(fontSizeClass);
+            }
+        }); 
+    });
+});
+
+
 theme.addEventListener("click", () => {
     for(let prop in themeList){
         if(themeList[prop] === event.target.id){
@@ -134,3 +165,4 @@ theme.addEventListener("click", () => {
 module.exports.createThemeDropdown = () => {
     view.createThemeDropdown(themeList);
 };
+

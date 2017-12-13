@@ -16,21 +16,27 @@ module.exports.printMessage = (message) => {
     }
     messageDiv.setAttribute("id", message.id);
     
-    let paragraph = document.createElement("p"),
+    let nameParagraph = document.createElement("p"),
+    textParagraph = document.createElement("p"),
     userNameTextNode = document.createTextNode(`${message.userName}: `),
     contentTextNode = document.createTextNode(message.text);
 
+    nameParagraph.setAttribute("class", "message-text-paragraph");    
+    textParagraph.setAttribute("class", "message-text-paragraph");
+
     let deleteButton = document.createElement("button");
-    deleteButton.setAttribute("class", "delete-button");
-    let deleteText = document.createTextNode("delete");
+    deleteButton.setAttribute("class", "delete-button btn btn-outline-secondary");
+    let deleteText = document.createTextNode("X");
     deleteButton.appendChild(deleteText);
 
-    paragraph.appendChild(userNameTextNode);
-    paragraph.appendChild(contentTextNode);
+    nameParagraph.appendChild(userNameTextNode);
+    textParagraph.appendChild(contentTextNode);
 
-    messageDiv.appendChild(paragraph);
+    messageDiv.appendChild(nameParagraph);
+    messageDiv.appendChild(textParagraph);    
     messageDiv.appendChild(deleteButton);
     chatBox.appendChild(messageDiv);
+    messageDiv.scrollIntoView();
 };
 
 module.exports.printMessages = (messages, ammount) => {
@@ -52,9 +58,10 @@ module.exports.deleteMessages = () => {
     });
 };
 
-module.exports.toggleStyle = () => {
-
+module.exports.toggleClass= (DOMelement, className) => {
+    DOMelement.classList.toggle(className);
 };
+
 
 module.exports.disableClearMessages = () => {
     document.getElementById("clear-button").classList.add("disabled");
@@ -67,6 +74,7 @@ module.exports.enableClearMessages = () => {
 module.exports.setUser = (string) =>{
     currentUser = string;
 };
+
 
 module.exports.createThemeDropdown = (themeList) => {
     let dropdown = document.getElementById("dropdown-selection");
@@ -94,3 +102,4 @@ module.exports.setTheme = (object, themeClass, themeList, themeName) => {
     object.classList.add(themeClass);
     themeDropdown.innerHTML = themeName;
 };
+

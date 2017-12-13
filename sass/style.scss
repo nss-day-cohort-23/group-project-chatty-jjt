@@ -10,6 +10,8 @@ $messages-box-background-color:  lightgray;
     margin: 0.5em;
     border-radius: 0.5em;
     width: 50%;
+    display: inline-grid;
+    grid-template-columns: 15% auto 8%;
 }
 
 .you {
@@ -19,6 +21,51 @@ $messages-box-background-color:  lightgray;
 .other {
     float: right;
     background-color: lightskyblue;
+}
+
+
+.message-bar{
+    padding: 0.5em;
+}
+
+.font-size-1{
+    font-size: 1em;
+}
+
+.font-size-2{
+    font-size: 1.5em;
+}
+
+.font-size-3{
+    font-size: 2em;
+}
+
+.font-size-4{
+    font-size: 3em;
+}
+
+.font-size-title{
+    font-size: 0.5em;
+    margin: auto;
+}
+
+.input-form {
+    width: 99%;
+}
+.input-container{
+    width: 99%;
+}
+
+html{
+    margin-bottom: 5em;
+}
+
+.delete-button{
+    height: 2.5em;   
+}
+
+.message-text-paragraph {
+    margin: .3em;
 }
 
 .dropup .dropdown-menu {
@@ -31,7 +78,7 @@ $messages-box-background-color:  lightgray;
     background-color: $body-background-color;
     .message-card {
         background: $message-background-color;
-        p {
+        p{
             color: $font-color;
         }
     }
@@ -59,8 +106,4 @@ $messages-box-background-color:  lightgray;
 
 .light {
     @include setColor(#69d2e7, black, white, #a7dbdb);
-}
-
-.normal {
-    
 }
