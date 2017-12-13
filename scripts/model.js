@@ -39,7 +39,7 @@ module.exports.returnSavedMessages = () => {
 module.exports.loadJSON = () => {
     return new Promise(function (resolve, reject){
         let request = new XMLHttpRequest();
-        request.addEventListener("load", () => {resolve(JSON.parse(request.responseText));});
+        request.addEventListener("load", () => {resolve(JSON.parse(request.responseText).messages);});
         request.addEventListener("error", () => {console.log("The files weren't loaded correctly!");});
         request.open("GET", 'json/messages.json');
         request.send();
@@ -47,19 +47,20 @@ module.exports.loadJSON = () => {
 };
 
 
-function createMessage(text, username){
+module.exports.createMessage = (text, userName) => {
     let numberOfMessages = savedMessages.length;
     let currentMessageIndex = numberOfMessages + 1;
     let newMessage = {
         id: currentMessageIndex,
         text: text,
-        username: username,
+        userName: userName,
         timestamp: Date.now()
     };
     savedMessages.push(newMessage);
+    return newMessage;
 }
 
-createMessage("Jordan", "Hello");
+// createMessage("Jordan", "Hello");
 
 module.exports.deleteMessage = (messageID) => {
     for (let i = 0; i < savedMessages.length; i++){

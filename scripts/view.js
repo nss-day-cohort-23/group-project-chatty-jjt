@@ -1,10 +1,17 @@
 "use strict";
 
+let currentUser = "";
+
 module.exports.printMessage = (message) => {
     let chatBox = document.getElementById("message-container");
     
     let messageDiv = document.createElement("div");
     messageDiv.classList.add("message-card");
+    if(message.userName === currentUser){
+        messageDiv.classList.add("you");
+    } else {
+        messageDiv.classList.add("other");
+    }
     messageDiv.setAttribute("id", message.id);
     
     let paragraph = document.createElement("p"),
@@ -13,7 +20,6 @@ module.exports.printMessage = (message) => {
 
     paragraph.appendChild(userNameTextNode);
     paragraph.appendChild(contentTextNode);
-    
 
     messageDiv.appendChild(paragraph);
 
@@ -21,8 +27,9 @@ module.exports.printMessage = (message) => {
 };
 
 module.exports.printMessages = (messages, ammount) => {
-    for( let i = 0; i < ammount; i++){
-        this.printMessage(messages[i]);
+    ammount = ammount > messages.length ? messages.length : ammount;
+    for(let i = 0; i < ammount; i++){
+            this.printMessage(messages[i]);
     }
 };
 
@@ -41,3 +48,15 @@ module.exports.deleteMessages = () => {
 module.exports.toggleStyle = () => {
 
 };
+
+module.exports.disableClearMessages = () => {
+    document.getElementById("clear-button").classList.add("disabled")
+};
+
+module.exports.enableClearMessages = () => {
+    document.getElementById("clear-button").classList.remove("disabled");
+};
+
+module.exports.setUser = (string) =>{
+    currentUser = string;
+}
