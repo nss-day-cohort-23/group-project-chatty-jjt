@@ -6,7 +6,16 @@ const inputBox = document.getElementById("input-box");
 const messageContainer = document.getElementById("message-container");
 const clearButton = document.getElementById("clear-button");
 const sendButton = document.getElementById("send-button");
+const theme = document.getElementById("theme-dropup");
+const body = document.getElementById("body");
 
+// Name, Class
+let themeList = {
+    "Pepto-Bismal": "pepto",
+    "Happy Blue": "light",
+    "Moody": "dark",
+    "Normal": "normal"
+};
 
 let user = "Joe";
 
@@ -91,3 +100,15 @@ const areMessages = () => {
 //         // view.toggleStyle();
     
 // });
+
+theme.addEventListener("click", () => {
+    for(let prop in themeList){
+        if(themeList[prop] === event.target.id){
+            view.setTheme(body, themeList[prop], themeList, prop);
+        }
+    }
+});
+
+module.exports.createThemeDropdown = () => {
+    view.createThemeDropdown(themeList);
+};
