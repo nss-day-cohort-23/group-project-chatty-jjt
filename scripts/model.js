@@ -1,5 +1,22 @@
 'use strict';
 
+// // Leave out Storage
+// //require("firebase/storage");
+
+//  // GET API KEY PLEASE
+//  var config = {
+//     apiKey: "AIzaSyAPb8HQ8Cn4xxDVSX0HbmQbKlhlodAsRPQ",
+//     authDomain: "nss-group-project-chatty-jjt.firebaseapp.com",
+//     databaseURL: "https://nss-group-project-chatty-jjt.firebaseio.com",
+//     projectId: "nss-group-project-chatty-jjt",
+//     storageBucket: "nss-group-project-chatty-jjt.appspot.com",
+//     messagingSenderId: "252243494183"
+//   };
+
+//   firebase.initializeApp(config);
+
+
+
 let savedMessages = [
     {
         id: "0",
@@ -32,43 +49,61 @@ let savedMessages = [
 // }
 
 
-module.exports.returnSavedMessages = () => {
-    return savedMessages;
-};
+// module.exports.returnSavedMessages = () => {
+//     return savedMessages;
+// };
 
-module.exports.loadJSON = () => {
+module.exports.loadJSON = (url) => {
     return new Promise(function (resolve, reject){
         let request = new XMLHttpRequest();
-        request.addEventListener("load", () => {resolve(JSON.parse(request.responseText).messages);});
+        request.addEventListener("load", () => {
+            let messagesObjects = JSON.parse(request.responseText);
+            let messagesArray = toArray(messagesObjects);
+            resolve(messagesArray);
+        });
         request.addEventListener("error", () => {console.log("The files weren't loaded correctly!");});
-        request.open("GET", 'json/messages.json');
+        request.open("GET", url);
         request.send();
     });
 };
 
+const toArray = (messagesObject) => {
+    let messagesArray = [];
+    for(let prop in messagesObject){
+        messagesObject[prop].id = prop;
+        messagesArray.push(messagesObject[prop]);
+    }
+    messagesArray.sort((a, b) => a.timestamp - b.timestamp);
+    return messagesArray;
+};
+
 
 module.exports.createMessage = (text, userName) => {
-    let numberOfMessages = savedMessages.length;
-    let currentMessageIndex = numberOfMessages + 1;
     let newMessage = {
-        id: currentMessageIndex,
+        timestamp: Date.now(),
         text: text,
-        userName: userName,
-        timestamp: Date.now()
+        userName: userName
     };
-    savedMessages.push(newMessage);
+
+    sendMessage(newMessage);
     return newMessage;
+};
+
+const sendMessage = (obj) => {
+    let json = JSON.stringify(obj);
+    let request = new XMLHttpRequest();
+    request.open("POST", "https://nss-group-project-chatty-jjt.firebaseio.com/messages.json");
+    request.send(json);
 };
 
 // createMessage("Jordan", "Hello");
 
-module.exports.deleteMessage = (messageID) => {
-    for (let i = 0; i < savedMessages.length; i++){
-        if (savedMessages[i].id == parseInt(messageID)){
-            savedMessages.splice(i, 1);
-        }
-    }
+module.exports.deleteMessage = (id) => {
+
+
+    let request = new XMLHttpRequest();
+    request.open("DELETE", `https://nss-group-project-chatty-jjt.firebaseio.com/messages/${id}.json`);
+    //request.setRequestHeader('Content-type','application/json; charset=utf-8');
+    request.send();
 };
-
-
 

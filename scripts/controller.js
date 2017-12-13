@@ -73,7 +73,8 @@ clearButton.addEventListener("click", () => {
 
 module.exports.loadMessages = function(){
     // gather messages from the JSON file and asign them to a variable
-    let allMessages = model.loadJSON().then(messages => {
+    let allMessages = model.loadJSON("https://nss-group-project-chatty-jjt.firebaseio.com/messages.json").then(messages => {
+        console.log(messages);
         view.setUser(user);
         view.printMessages(messages, 20);
         checkClearButton();
