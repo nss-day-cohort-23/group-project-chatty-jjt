@@ -94,14 +94,15 @@ fontSizeSlider.addEventListener("change", () => {
     let fontSizeClass = `font-size-${selectedFontSize}`;
     let classListSearchString = /font-size-[0-9]/;
     let messageCards = document.getElementsByClassName("message-card");
-    console.log("this should be true", /font-size-[0-9]/.test("font-size-3 hello hello"));
     [...messageCards].forEach(element => {
         let classList = element.classList;
         classList.add(fontSizeClass);
         [...classList].forEach(className => {
-            let stringToReplace = className.match(classListSearchString); // how do I pull data out of this?
-            console.log("type of string to Replace", typeof stringToReplace);
-            className = className.replace(stringToReplace, fontSizeClass);
+            if (/font-size-[0-9]/.test(className)){
+                console.log("We're inside the true statement");
+                classList.remove(className);
+                classList.add(fontSizeClass);
+            }
         }); 
     });
 });
