@@ -1,3 +1,5 @@
 node_modules
 dist/bundle.js
 css/main.css
+.sass-cache/d91e9cefb8a1af0c16899e1998c21f252b69fc59/style.scssc
+css/main.css.map
