@@ -98,8 +98,6 @@ const sendMessage = (obj) => {
 
 // createMessage("Jordan", "Hello");
 
-
-
 module.exports.deleteMessage = (id) => {
 
 
