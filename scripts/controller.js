@@ -98,29 +98,11 @@ const areMessages = () => {
 theme.addEventListener("click", () => {
     for(let prop in themeList){
         if(themeList[prop] === event.target.id){
-            body.classList.add(themeList[prop]);
-            removeOtherTheme(themeList[prop]);
+            view.addClass(body, themeList[prop], themeList);
         }
     }
 });
 
-const removeOtherTheme = (currentTheme) => {
-    for(let prop in themeList){
-        if(body.classList.contains(themeList[prop]) && themeList[prop] !== currentTheme){
-            body.classList.remove(themeList[prop]);
-        }
-    }
-};
-
 module.exports.createThemeDropdown = () => {
-    let dropdown = document.getElementById("dropdown-selection");
-    for(let prop in themeList){
-        let anchor = document.createElement("a");
-        anchor.setAttribute("class", "dropdown-item");
-        anchor.setAttribute("id", themeList[prop])
-        anchor.setAttribute("href", "#")
-        let anchorText = document.createTextNode(prop);
-        anchor.appendChild(anchorText);
-        dropdown.appendChild(anchor);
-    }
+    view.createThemeDropdown(themeList);
 };

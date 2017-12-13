@@ -60,3 +60,29 @@ module.exports.enableClearMessages = () => {
 module.exports.setUser = (string) =>{
     currentUser = string;
 }
+
+module.exports.createThemeDropdown = (themeList) => {
+    let dropdown = document.getElementById("dropdown-selection");
+    for(let prop in themeList){
+        let anchor = document.createElement("a");
+        anchor.setAttribute("class", "dropdown-item");
+        anchor.setAttribute("id", themeList[prop])
+        anchor.setAttribute("href", "#")
+        let anchorText = document.createTextNode(prop);
+        anchor.appendChild(anchorText);
+        dropdown.appendChild(anchor);
+    }
+};
+
+module.exports.addClass = (object, classToAdd, themeList) => {
+    removeOtherThemes(object, classToAdd, themeList);
+    object.classList.add(classToAdd);
+};
+
+const removeOtherThemes = (object, currentTheme, themeList) => {
+    for(let prop in themeList){
+        if(object.classList.contains(themeList[prop]) && themeList[prop] !== currentTheme){
+            object.classList.remove(themeList[prop]);
+        }
+    }
+};
