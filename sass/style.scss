@@ -21,9 +21,33 @@ $messages-box-background-color:  lightgray;
 }
 
 
+.message-bar{
+    padding: 0.5em;
+}
+
+.font-size-1{
+    font-size: 1em;
+}
+
+.font-size-2{
+    font-size: 1.5em;
+}
+
+.font-size-3{
+    font-size: 2em;
+}
+
+.font-size-4{
+    font-size: 3em;
+}
+
+.font-size-title{
+    font-size: 0.5em;
+    margin: auto;
+}
+
 .input-form {
     width: 99%;
-    
 }
 .input-container{
     width: 99%;
@@ -51,7 +75,7 @@ html{
     background-color: $body-background-color;
     .message-card {
         background: $message-background-color;
-        p {
+        p{
             color: $font-color;
         }
     }
@@ -79,8 +103,4 @@ html{
 
 .light {
     @include setColor(#69d2e7, black, white, #a7dbdb);
-}
-
-.normal {
-    
 }

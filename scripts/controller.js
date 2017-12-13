@@ -6,6 +6,7 @@ const inputBox = document.getElementById("input-box");
 const messageContainer = document.getElementById("message-container");
 const clearButton = document.getElementById("clear-button");
 const sendButton = document.getElementById("send-button");
+const fontSizeSlider = document.getElementById("font-size-slider");
 const theme = document.getElementById("theme-dropup");
 const body = document.getElementById("body");
 
@@ -112,6 +113,26 @@ const areMessages = () => {
     
 // });
 
+
+fontSizeSlider.addEventListener("change", () => {
+    let selectedFontSize = fontSizeSlider.value;
+    let fontSizeClass = `font-size-${selectedFontSize}`;
+    let classListSearchString = /font-size-[0-9]/;
+    let messageCards = document.getElementsByClassName("message-card");
+    [...messageCards].forEach(element => {
+        let classList = element.classList;
+        classList.add(fontSizeClass);
+        [...classList].forEach(className => {
+            if (/font-size-[0-9]/.test(className)){
+                console.log("We're inside the true statement");
+                classList.remove(className);
+                classList.add(fontSizeClass);
+            }
+        }); 
+    });
+});
+
+
 theme.addEventListener("click", () => {
     for(let prop in themeList){
         if(themeList[prop] === event.target.id){
@@ -123,3 +144,4 @@ theme.addEventListener("click", () => {
 module.exports.createThemeDropdown = () => {
     view.createThemeDropdown(themeList);
 };
+

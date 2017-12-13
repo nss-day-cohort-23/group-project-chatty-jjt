@@ -96,7 +96,6 @@ const sendMessage = (obj) => {
     request.send(json);
 };
 
-// createMessage("Jordan", "Hello");
 
 module.exports.deleteMessage = (id) => {
 
