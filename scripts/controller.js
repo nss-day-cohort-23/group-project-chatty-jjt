@@ -40,6 +40,7 @@ messageContainer.addEventListener("click", function(event){
         // model.clearMessages
 
         view.deleteMessage(messageID);
+        model.deleteMessage(messageID);
     }
 });
 
