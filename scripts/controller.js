@@ -39,16 +39,21 @@ const saveNewMessage = () => {
 
 
 messageContainer.addEventListener("click", function(event){
-    if(event.target.classList.contains === "deleteButton"){
+    if(event.target.classList.contains("delete-button")){
         // current target's id is saved to a variable so we can pass it into these functions
-        let messageID = this.parentNode.id;
+        let messageID = event.target.parentNode.id;
         // execute deleteMessagefromDOM function
         // view.clearMessages
 
         // execute deleteMessageFromJSON function
         // model.clearMessages
+
+        view.deleteMessage(messageID);
+        model.deleteMessage(messageID);
     }
 });
+
+
 
 // CLEAR BUTTON
 clearButton.addEventListener("click", () => {
