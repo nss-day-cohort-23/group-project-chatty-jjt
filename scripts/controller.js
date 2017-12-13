@@ -6,6 +6,8 @@ const inputBox = document.getElementById("input-box");
 const messageContainer = document.getElementById("message-container");
 const clearButton = document.getElementById("clear-button");
 const sendButton = document.getElementById("send-button");
+const fontSizeSlider = document.getElementById("font-size-slider");
+
 
 
 let user = "Joe";
@@ -86,3 +88,24 @@ const areMessages = () => {
 //         // view.toggleStyle();
     
 // });
+
+fontSizeSlider.addEventListener("change", () => {
+    let selectedFontSize = fontSizeSlider.value;
+    let fontSizeClass = `font-size-${selectedFontSize}`;
+    let classListSearchString = /font-size-[0-9]/;
+    let messageCards = document.getElementsByClassName("message-card");
+    console.log("this should be true", /font-size-[0-9]/.test("font-size-3 hello hello"));
+    [...messageCards].forEach(element => {
+        let classList = element.classList;
+        classList.add(fontSizeClass);
+        [...classList].forEach(className => {
+            let stringToReplace = className.match(classListSearchString);
+            console.log("type of string to Replace", stringToReplace);
+        }); 
+    });
+});
+
+// var str = 'John Smith';
+// var newstr = str.replace(re, '$2, $1');
+// console.log(newstr);
+

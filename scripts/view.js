@@ -45,9 +45,10 @@ module.exports.deleteMessages = () => {
     });
 };
 
-module.exports.toggleStyle = () => {
-
+module.exports.toggleClass= (DOMelement, className) => {
+    DOMelement.classList.toggle(className);
 };
+
 
 module.exports.disableClearMessages = () => {
     document.getElementById("clear-button").classList.add("disabled");
