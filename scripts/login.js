@@ -1,5 +1,6 @@
 "use strict";
 const firebase = require("firebase");
+const controller = require("./controller");
 
 const loadAPI = () => {
     return new Promise(function (resolve, reject){
@@ -27,7 +28,16 @@ module.exports.signIn = () => {
                 storageBucket: "nss-group-project-chatty-jjt.appspot.com",
                 messagingSenderId: "252243494183"
             };
+
+         
+
             firebase.initializeApp(config);
+
+            var ref = firebase.database().ref("messages");
+            ref.on('value', function(snapshot) {
+                controller.loadMessages();
+            });
+
             googleSignin().then( data => {
                 resolve(data);
             });

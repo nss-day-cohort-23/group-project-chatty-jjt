@@ -75,6 +75,10 @@ module.exports.setUser = (string) =>{
     currentUser = string;
 };
 
+module.exports.clearMessageContainer = () => {
+    let chatBox = document.getElementById("message-container");
+    chatBox.innerHTML = "";
+};
 
 module.exports.createThemeDropdown = (themeList) => {
     let dropdown = document.getElementById("dropdown-selection");
