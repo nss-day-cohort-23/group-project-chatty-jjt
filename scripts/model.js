@@ -17,6 +17,7 @@
 
 
 
+
 let savedMessages = [
     {
         id: "0",
@@ -66,6 +67,8 @@ module.exports.loadJSON = (url) => {
         request.send();
     });
 };
+
+
 
 const toArray = (messagesObject) => {
     let messagesArray = [];
