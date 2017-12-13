@@ -12,6 +12,22 @@
 <body id="body">
         
     <nav class="navbar navbar-light bg-light fixed-bottom">
+
+        <div class="input-container">
+            <!-- <div id="empty-validation" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+            </div> -->
+            <form id="input-form" onsubmit="return false">
+                <div class="input-group">
+                    
+                    <input type="text" id="input-box" class="form-control" placeholder="Text..." aria-label="Text..." aria-describedby="basic-addon2" required>
+                    <button type="button" id="send-button" class="btn btn-success">Send</button>
+                    <button type="button" id="clear-button" class="btn btn-outline-danger ml-2">Clear Messages</button>
+                </div>
+            </form>
         <div class="container">
             <div class="input-group">
                 <input type="text" id="input-box" class="form-control" placeholder="Text..." aria-label="Text..." aria-describedby="basic-addon2">
@@ -27,6 +43,7 @@
                 </div>
             </div>
             
+
         </div>
     </nav>
     <div class="container my-5">

@@ -33,8 +33,15 @@ sendButton.addEventListener("click", function(event) {
 
 const saveNewMessage = () => {
     let brandNewMessage = inputBox.value;
-    view.printMessage(model.createMessage(brandNewMessage, user));
-    inputBox.value = "";
+    if(brandNewMessage.length === 0){
+        // document.getElementById("empty-validation").toggle();
+        console.log("empty");
+    }else{
+        view.printMessage(model.createMessage(brandNewMessage, user));
+        inputBox.value = "";
+    }
+    // messageContainer.scrollTop = messageContainer.sc;
+
 };
 
 
@@ -70,8 +77,11 @@ module.exports.loadMessages = function(){
         view.setUser(user);
         view.printMessages(messages, 20);
         checkClearButton();
+        
     }); // might be a different function name
     // send those messages to the output function to print them to the DOM
+    // messageContainer.scrollTop = messageContainer.scrollHeight;
+
 };
 
 
