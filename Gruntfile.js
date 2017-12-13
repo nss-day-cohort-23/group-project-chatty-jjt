@@ -2,7 +2,7 @@ module.exports = function(grunt){
     
     grunt.initConfig({
         jshint: {
-            files: ['js/**/*.js'],
+            files: ['scripts/**/*.js'],
             options: {
                 predef: ["document", "console", "$", "alert"],//Ignore these even though we haven't defined them
                 esnext: true, //Telling to use latest version of javascript

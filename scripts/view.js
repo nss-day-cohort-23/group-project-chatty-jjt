@@ -18,11 +18,16 @@ module.exports.printMessage = (message) => {
     userNameTextNode = document.createTextNode(`${message.userName}: `),
     contentTextNode = document.createTextNode(message.text);
 
+    let deleteButton = document.createElement("button");
+    deleteButton.setAttribute("class", "delete-button");
+    let deleteText = document.createTextNode("delete");
+    deleteButton.appendChild(deleteText);
+
     paragraph.appendChild(userNameTextNode);
     paragraph.appendChild(contentTextNode);
 
     messageDiv.appendChild(paragraph);
-
+    messageDiv.appendChild(deleteButton);
     chatBox.appendChild(messageDiv);
 };
 
@@ -33,8 +38,8 @@ module.exports.printMessages = (messages, ammount) => {
     }
 };
 
-module.exports.deleteMessage = (message) => {
-    let messageDom = document.getElementById(`${message.id}`);
+module.exports.deleteMessage = (id) => {
+    let messageDom = document.getElementById(`${id}`);
     messageDom.remove();
 };
 
@@ -50,7 +55,7 @@ module.exports.toggleStyle = () => {
 };
 
 module.exports.disableClearMessages = () => {
-    document.getElementById("clear-button").classList.add("disabled")
+    document.getElementById("clear-button").classList.add("disabled");
 };
 
 module.exports.enableClearMessages = () => {
@@ -59,4 +64,4 @@ module.exports.enableClearMessages = () => {
 
 module.exports.setUser = (string) =>{
     currentUser = string;
-}
+};
