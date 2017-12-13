@@ -7,8 +7,16 @@ const messageContainer = document.getElementById("message-container");
 const clearButton = document.getElementById("clear-button");
 const sendButton = document.getElementById("send-button");
 const fontSizeSlider = document.getElementById("font-size-slider");
+const theme = document.getElementById("theme-dropup");
+const body = document.getElementById("body");
 
-
+// Name, Class
+let themeList = {
+    "Pepto-Bismal": "pepto",
+    "Happy Blue": "light",
+    "Moody": "dark",
+    "Normal": "normal"
+};
 
 let user = "Joe";
 
@@ -32,16 +40,21 @@ const saveNewMessage = () => {
 
 
 messageContainer.addEventListener("click", function(event){
-    if(event.target.classList.contains === "deleteButton"){
+    if(event.target.classList.contains("delete-button")){
         // current target's id is saved to a variable so we can pass it into these functions
-        let messageID = this.parentNode.id;
+        let messageID = event.target.parentNode.id;
         // execute deleteMessagefromDOM function
         // view.clearMessages
 
         // execute deleteMessageFromJSON function
         // model.clearMessages
+
+        view.deleteMessage(messageID);
+        model.deleteMessage(messageID);
     }
 });
+
+
 
 // CLEAR BUTTON
 clearButton.addEventListener("click", () => {
@@ -54,7 +67,8 @@ clearButton.addEventListener("click", () => {
 
 module.exports.loadMessages = function(){
     // gather messages from the JSON file and asign them to a variable
-    let allMessages = model.loadJSON().then(messages => {
+    let allMessages = model.loadJSON("https://nss-group-project-chatty-jjt.firebaseio.com/messages.json").then(messages => {
+        console.log(messages);
         view.setUser(user);
         view.printMessages(messages, 20);
         checkClearButton();
@@ -89,6 +103,7 @@ const areMessages = () => {
     
 // });
 
+
 fontSizeSlider.addEventListener("change", () => {
     let selectedFontSize = fontSizeSlider.value;
     let fontSizeClass = `font-size-${selectedFontSize}`;
@@ -107,7 +122,16 @@ fontSizeSlider.addEventListener("change", () => {
     });
 });
 
-// var str = 'John Smith';
-// var newstr = str.replace(re, '$2, $1');
-// console.log(newstr);
+
+theme.addEventListener("click", () => {
+    for(let prop in themeList){
+        if(themeList[prop] === event.target.id){
+            view.setTheme(body, themeList[prop], themeList, prop);
+        }
+    }
+});
+
+module.exports.createThemeDropdown = () => {
+    view.createThemeDropdown(themeList);
+};
 
