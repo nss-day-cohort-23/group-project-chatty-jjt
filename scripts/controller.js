@@ -1,6 +1,8 @@
 "use strict";
 const view = require("./view");
 const model = require("./model");
+const login = require("./login");
+
 
 const inputBox = document.getElementById("input-box");
 const messageContainer = document.getElementById("message-container");
@@ -8,6 +10,7 @@ const clearButton = document.getElementById("clear-button");
 const sendButton = document.getElementById("send-button");
 const theme = document.getElementById("theme-dropup");
 const body = document.getElementById("body");
+const signOut = document.getElementById("signOut");
 
 // Name, Class
 let themeList = {
@@ -17,18 +20,36 @@ let themeList = {
     "Normal": "normal"
 };
 
-let user = "Joe";
+let user = "";
+
+module.exports.setUser = () => {
+    login.signIn().then(data => {
+        user = data;
+        view.setUser(user);
+        this.loadMessages();
+        this.createThemeDropdown();
+    });
+};
+
+signOut.addEventListener("click", () => {
+    login.googleSignout();
+    user = "";
+});
 
 inputBox.addEventListener("keyup", function(event) {
     if(event.keyCode === 13){
-        saveNewMessage();
-        checkClearButton();
+        if(user !== ""){
+            saveNewMessage();
+            checkClearButton();
+        }
     }
 });
 
 sendButton.addEventListener("click", function(event) {
-        saveNewMessage();
-        checkClearButton();
+        if(user !== ""){
+            saveNewMessage();
+            checkClearButton();
+        }
 });
 
 const saveNewMessage = () => {
@@ -42,6 +63,7 @@ messageContainer.addEventListener("click", function(event){
     if(event.target.classList.contains("delete-button")){
         // current target's id is saved to a variable so we can pass it into these functions
         let messageID = event.target.parentNode.id;
+
         // execute deleteMessagefromDOM function
         // view.clearMessages
 
@@ -66,9 +88,8 @@ clearButton.addEventListener("click", () => {
 
 module.exports.loadMessages = function(){
     // gather messages from the JSON file and asign them to a variable
-    let allMessages = model.loadJSON("https://nss-group-project-chatty-jjt.firebaseio.com/messages.json").then(messages => {
-        console.log(messages);
-        view.setUser(user);
+    let allMessages = model.loadJSON("https://nss-group-project-chatty-jjt.firebaseio.com/messages.json").then(messages => {  
+    //view.setUser(user);
         view.printMessages(messages, 20);
         checkClearButton();
     }); // might be a different function name
