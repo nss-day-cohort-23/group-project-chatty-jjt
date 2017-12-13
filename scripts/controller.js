@@ -13,11 +13,13 @@ let user = "Joe";
 inputBox.addEventListener("keyup", function(event) {
     if(event.keyCode === 13){
         saveNewMessage();
+        checkClearButton();
     }
 });
 
 sendButton.addEventListener("click", function(event) {
         saveNewMessage();
+        checkClearButton();
 });
 
 const saveNewMessage = () => {
@@ -44,6 +46,7 @@ clearButton.addEventListener("click", () => {
     let totalMessages = document.getElementsByClassName("message-card");
     if(totalMessages !== undefined && !clearButton.classList.contains("disabled")){
         view.deleteMessages();
+        checkClearButton();
     }
 });
 
@@ -52,29 +55,28 @@ module.exports.loadMessages = function(){
     let allMessages = model.loadJSON().then(messages => {
         view.setUser(user);
         view.printMessages(messages, 20);
+        checkClearButton();
     }); // might be a different function name
     // send those messages to the output function to print them to the DOM
 };
 
 
-// const checkClearButton = () => {
-//     console.log(areMessages());
-//     if(areMessages() === true){
-//         view.enableClearMessages();
-//     } else {
-//         view.disableClearMessages();
-//     }
-// };
+const checkClearButton = () => {
+    if(areMessages() === true){
+        view.enableClearMessages();
+    } else {
+        view.disableClearMessages();
+    }
+};
 
-// const areMessages = () => {
-//     let messages = document.getElementsByClassName("message-card");
-//     console.log(messages[1]);
-//     if(messages[0] !== undefined){
-//         return true;
-//     } else {
-//         return false;
-//     }
-// };
+const areMessages = () => {
+    let messages = document.querySelectorAll(".message-card");
+    if(messages[0] !== undefined){
+        return true;
+    } else {
+        return false;
+    }
+};
 
 // const darkThemeCheckbox = document.getElementById("dark-theme-checkbox");
 // // darkThemeCheckbox.addEventListener("");

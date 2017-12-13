@@ -1,9 +1,21 @@
 {
     "messages": [
         {
-            "id": "01",
+            "id": "0",
             "userName": "Joe",
             "text": "Hey guys!  Whats up?",
+            "timestamp": "Tue Dec 12 2017 13:35:17 GMT-0600"
+        },
+        {
+            "id": "1",
+            "userName": "Jordan",
+            "text": "Not much!",
+            "timestamp": "Tue Dec 12 2017 13:35:17 GMT-0600"
+        },
+        {
+            "id": "2",
+            "userName": "Tim",
+            "text": "Hi!",
             "timestamp": "Tue Dec 12 2017 13:35:17 GMT-0600"
         }
     ]
