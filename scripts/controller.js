@@ -7,11 +7,13 @@ const messageContainer = document.getElementById("message-container");
 const clearButton = document.getElementById("clear-button");
 const sendButton = document.getElementById("send-button");
 const theme = document.getElementById("theme-dropup");
+const body = document.getElementById("body");
 
+// Name, Class
 let themeList = {
-    "light": "light",
-    "dark": "dark",
-    "normal": "normal"
+    "Light": "light",
+    "Dark": "dark",
+    "Normal": "normal"
 };
 
 let user = "Joe";
@@ -95,8 +97,8 @@ const areMessages = () => {
 
 theme.addEventListener("click", () => {
     for(let prop in themeList){
-        if(prop === event.target.id){
-            messageContainer.classList.add(themeList[prop]);
+        if(themeList[prop] === event.target.id){
+            body.classList.add(themeList[prop]);
             removeOtherTheme(themeList[prop]);
         }
     }
@@ -104,8 +106,21 @@ theme.addEventListener("click", () => {
 
 const removeOtherTheme = (currentTheme) => {
     for(let prop in themeList){
-        if(messageContainer.classList.contains(themeList[prop]) && themeList[prop] !== currentTheme){
-            messageContainer.classList.remove(themeList[prop]);
+        if(body.classList.contains(themeList[prop]) && themeList[prop] !== currentTheme){
+            body.classList.remove(themeList[prop]);
         }
+    }
+};
+
+module.exports.createThemeDropdown = () => {
+    let dropdown = document.getElementById("dropdown-selection");
+    for(let prop in themeList){
+        let anchor = document.createElement("a");
+        anchor.setAttribute("class", "dropdown-item");
+        anchor.setAttribute("id", themeList[prop])
+        anchor.setAttribute("href", "#")
+        let anchorText = document.createTextNode(prop);
+        anchor.appendChild(anchorText);
+        dropdown.appendChild(anchor);
     }
 };

@@ -17,3 +17,31 @@ $messages-box-background-color:  lightgray;
     float: right;
     background-color: lightskyblue;
 }
+
+.dropup .dropdown-menu {
+    top: auto;
+    bottom: 100%;
+    margin-bottom: .125rem;
+}
+
+@mixin setColor($background-color,  $font-color) {
+    background-color: $background-color;
+    .message-card {
+        p {
+            color: $font-color;
+        }
+    }
+}
+
+.dark {
+    @include setColor(darkgray, black);
+    
+}
+
+.light {
+    @include setColor(lightgray, white);
+}
+
+.normal {
+
+}
