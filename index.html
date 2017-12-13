@@ -12,21 +12,22 @@
 <body id="body">
         
     <nav class="navbar navbar-light bg-light fixed-bottom">
-        <div class="container">
-            <div class="input-group">
-                <input type="text" id="input-box" class="form-control" placeholder="Text..." aria-label="Text..." aria-describedby="basic-addon2">
-                <button type="button" id="send-button" class="btn btn-success">Send</button>
-                <button type="button" id="clear-button" class="btn btn-outline-danger ml-2">Clear Messages</button>
-                <div id="theme-dropup" class="dropup ml-2">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Normal
-                    </button>
-                    <div id="dropdown-selection" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        
+        <div class="input-container">
+
+            <form id="input-form" onsubmit="return false">
+                <div class="input-group">
+                    <input type="text" id="input-box" class="form-control" placeholder="Text..." aria-label="Text..." aria-describedby="basic-addon2" required>
+                    <button type="button" id="send-button" class="btn btn-success">Send</button>
+                    <button type="button" id="clear-button" class="btn btn-outline-danger ml-2">Clear Messages</button>
+                    <div id="theme-dropup" class="dropup ml-2">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Normal
+                        </button>
+                        <div id="dropdown-selection" class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
                     </div>
                 </div>
-            </div>
-            
+            </form>
+
         </div>
     </nav>
     <div class="container my-5">
