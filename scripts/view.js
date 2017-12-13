@@ -2,6 +2,8 @@
 
 let currentUser = "";
 
+const themeDropdown = document.getElementById("dropdownMenuButton");
+
 module.exports.printMessage = (message) => {
     let chatBox = document.getElementById("message-container");
     
@@ -71,3 +73,32 @@ module.exports.enableClearMessages = () => {
 module.exports.setUser = (string) =>{
     currentUser = string;
 };
+
+
+module.exports.createThemeDropdown = (themeList) => {
+    let dropdown = document.getElementById("dropdown-selection");
+    for(let prop in themeList){
+        let anchor = document.createElement("a");
+        anchor.setAttribute("class", "dropdown-item");
+        anchor.setAttribute("id", themeList[prop])
+        anchor.setAttribute("href", "#")
+        let anchorText = document.createTextNode(prop);
+        anchor.appendChild(anchorText);
+        dropdown.appendChild(anchor);
+    }
+};
+
+const removeOtherThemes = (object, currentTheme, themeList) => {
+    for(let prop in themeList){
+        if(object.classList.contains(themeList[prop]) && themeList[prop] !== currentTheme){
+            object.classList.remove(themeList[prop]);
+        }
+    }
+};
+
+module.exports.setTheme = (object, themeClass, themeList, themeName) => {
+    removeOtherThemes(object, themeClass, themeList);
+    object.classList.add(themeClass);
+    themeDropdown.innerHTML = themeName;
+};
+
