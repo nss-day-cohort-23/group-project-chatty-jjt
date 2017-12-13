@@ -58,7 +58,7 @@ module.exports.createMessage = (text, userName) => {
     };
     savedMessages.push(newMessage);
     return newMessage;
-}
+};
 
 // createMessage("Jordan", "Hello");
 

@@ -50,7 +50,7 @@ module.exports.toggleStyle = () => {
 };
 
 module.exports.disableClearMessages = () => {
-    document.getElementById("clear-button").classList.add("disabled")
+    document.getElementById("clear-button").classList.add("disabled");
 };
 
 module.exports.enableClearMessages = () => {
@@ -59,4 +59,4 @@ module.exports.enableClearMessages = () => {
 
 module.exports.setUser = (string) =>{
     currentUser = string;
-}
+};
