@@ -49,6 +49,9 @@ $messages-box-background-color:  lightgray;
 
 .pepto {
     @include setColor(lightblue, white, pink, pink);
+    h1 {
+        color: pink;
+    }
 }
 
 .light {
