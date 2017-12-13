@@ -6,7 +6,13 @@ const inputBox = document.getElementById("input-box");
 const messageContainer = document.getElementById("message-container");
 const clearButton = document.getElementById("clear-button");
 const sendButton = document.getElementById("send-button");
+const theme = document.getElementById("theme-dropup");
 
+let themeList = {
+    "light": "light",
+    "dark": "dark",
+    "normal": "normal"
+};
 
 let user = "Joe";
 
@@ -86,3 +92,20 @@ const areMessages = () => {
 //         // view.toggleStyle();
     
 // });
+
+theme.addEventListener("click", () => {
+    for(let prop in themeList){
+        if(prop === event.target.id){
+            messageContainer.classList.add(themeList[prop]);
+            removeOtherTheme(themeList[prop]);
+        }
+    }
+});
+
+const removeOtherTheme = (currentTheme) => {
+    for(let prop in themeList){
+        if(messageContainer.classList.contains(themeList[prop]) && themeList[prop] !== currentTheme){
+            messageContainer.classList.remove(themeList[prop]);
+        }
+    }
+};
