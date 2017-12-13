@@ -11,7 +11,8 @@ const body = document.getElementById("body");
 
 // Name, Class
 let themeList = {
-    "Happy": "light",
+    "Pepto-Bismal": "pepto",
+    "Happy Blue": "light",
     "Moody": "dark",
     "Normal": "normal"
 };

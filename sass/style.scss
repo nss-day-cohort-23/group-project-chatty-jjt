@@ -24,22 +24,35 @@ $messages-box-background-color:  lightgray;
     margin-bottom: .125rem;
 }
 
-@mixin setColor($background-color,  $font-color) {
-    background-color: $background-color;
+@mixin setColor($body-background-color,  $font-color, $message-background-color, $nav-background-color) {
+    background-color: $body-background-color;
     .message-card {
+        background: $message-background-color;
         p {
             color: $font-color;
         }
     }
+    nav {
+        background-color: $nav-background-color !important;
+    }
 }
 
 .dark {
-    @include setColor(darkgray, black);
-    
+    @include setColor(#67828d, white, #535d72, 	#67828d	);
+    nav {
+        #clear-button{
+            color: black !important;
+            border-color: black;
+        }
+    }
+}
+
+.pepto {
+    @include setColor(lightblue, white, pink, pink);
 }
 
 .light {
-    @include setColor(lightgray, white);
+    @include setColor(#69d2e7, black, white, #a7dbdb);
 }
 
 .normal {
