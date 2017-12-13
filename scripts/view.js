@@ -2,6 +2,8 @@
 
 let currentUser = "";
 
+const themeDropdown = document.getElementById("dropdownMenuButton");
+
 module.exports.printMessage = (message) => {
     let chatBox = document.getElementById("message-container");
     
@@ -74,15 +76,16 @@ module.exports.createThemeDropdown = (themeList) => {
     }
 };
 
-module.exports.addClass = (object, classToAdd, themeList) => {
-    removeOtherThemes(object, classToAdd, themeList);
-    object.classList.add(classToAdd);
-};
-
 const removeOtherThemes = (object, currentTheme, themeList) => {
     for(let prop in themeList){
         if(object.classList.contains(themeList[prop]) && themeList[prop] !== currentTheme){
             object.classList.remove(themeList[prop]);
         }
     }
+};
+
+module.exports.setTheme = (object, themeClass, themeList, themeName) => {
+    removeOtherThemes(object, themeClass, themeList);
+    object.classList.add(themeClass);
+    themeDropdown.innerHTML = themeName;
 };

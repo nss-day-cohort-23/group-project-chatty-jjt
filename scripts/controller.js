@@ -11,8 +11,8 @@ const body = document.getElementById("body");
 
 // Name, Class
 let themeList = {
-    "Light": "light",
-    "Dark": "dark",
+    "Happy": "light",
+    "Moody": "dark",
     "Normal": "normal"
 };
 
@@ -98,7 +98,7 @@ const areMessages = () => {
 theme.addEventListener("click", () => {
     for(let prop in themeList){
         if(themeList[prop] === event.target.id){
-            view.addClass(body, themeList[prop], themeList);
+            view.setTheme(body, themeList[prop], themeList, prop);
         }
     }
 });
