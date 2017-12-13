@@ -40,7 +40,7 @@ module.exports.signIn = () => {
 
 let provider  = new firebase.auth.GoogleAuthProvider();
 
-function googleSignin() {
+const googleSignin = () => {
     return new Promise(function(resolve, reject) { 
         firebase.auth()
         .signInWithPopup(provider).then(function(result) {
@@ -58,7 +58,7 @@ function googleSignin() {
             console.log(error.message);
         });
     });
-}
+};
 
 module.exports.googleSignout = () => {
    firebase.auth().signOut()
