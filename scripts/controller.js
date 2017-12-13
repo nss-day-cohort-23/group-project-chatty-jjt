@@ -99,8 +99,9 @@ fontSizeSlider.addEventListener("change", () => {
         let classList = element.classList;
         classList.add(fontSizeClass);
         [...classList].forEach(className => {
-            let stringToReplace = className.match(classListSearchString);
-            console.log("type of string to Replace", stringToReplace);
+            let stringToReplace = className.match(classListSearchString); // how do I pull data out of this?
+            console.log("type of string to Replace", typeof stringToReplace);
+            className = className.replace(stringToReplace, fontSizeClass);
         }); 
     });
 });
