@@ -66,7 +66,6 @@ module.exports.deleteMessage = (messageID) => {
     for (let i = 0; i < savedMessages.length; i++){
         if (savedMessages[i].id == parseInt(messageID)){
             savedMessages.splice(i, 1);
-            console.log("in funtion", savedMessages);
         }
     }
 };
