@@ -73,8 +73,8 @@ module.exports.createThemeDropdown = (themeList) => {
     for(let prop in themeList){
         let anchor = document.createElement("a");
         anchor.setAttribute("class", "dropdown-item");
-        anchor.setAttribute("id", themeList[prop])
-        anchor.setAttribute("href", "#")
+        anchor.setAttribute("id", themeList[prop]);
+        anchor.setAttribute("href", "#");
         let anchorText = document.createTextNode(prop);
         anchor.appendChild(anchorText);
         dropdown.appendChild(anchor);
