@@ -1,8 +1,19 @@
 
 $messages-box-background-color:  lightgray;
 
-.messages-box {
-    padding: 1em;
-    border-radius: 1em;
+.message-card {
+    padding: 0.1em;
+    padding-left: 1em;
+    margin: 0.5em;
+    border-radius: 0.5em;
+    width: 50%;
+}
+
+.you {
+    float: left;
     background-color: $messages-box-background-color;
+}
+.other {
+    float: right;
+    background-color: lightskyblue;
 }

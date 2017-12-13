@@ -1,10 +1,17 @@
 "use strict";
 
+let currentUser = "";
+
 module.exports.printMessage = (message) => {
     let chatBox = document.getElementById("message-container");
     
     let messageDiv = document.createElement("div");
     messageDiv.classList.add("message-card");
+    if(message.userName === currentUser){
+        messageDiv.classList.add("you");
+    } else {
+        messageDiv.classList.add("other");
+    }
     messageDiv.setAttribute("id", message.id);
     
     let paragraph = document.createElement("p"),
@@ -49,3 +56,7 @@ module.exports.disableClearMessages = () => {
 module.exports.enableClearMessages = () => {
     document.getElementById("clear-button").classList.remove("disabled");
 };
+
+module.exports.setUser = (string) =>{
+    currentUser = string;
+}

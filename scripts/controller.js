@@ -24,7 +24,6 @@ const saveNewMessage = () => {
     let brandNewMessage = inputBox.value;
     view.printMessage(model.createMessage(brandNewMessage, user));
     inputBox.value = "";
-    checkClearButton();
 };
 
 
@@ -37,7 +36,6 @@ messageContainer.addEventListener("click", function(event){
 
         // execute deleteMessageFromJSON function
         // model.clearMessages
-        checkClearButton();
     }
 });
 
@@ -46,37 +44,37 @@ clearButton.addEventListener("click", () => {
     let totalMessages = document.getElementsByClassName("message-card");
     if(totalMessages !== undefined && !clearButton.classList.contains("disabled")){
         view.deleteMessages();
-        checkClearButton();
     }
 });
 
 module.exports.loadMessages = function(){
     // gather messages from the JSON file and asign them to a variable
     let allMessages = model.loadJSON().then(messages => {
+        view.setUser(user);
         view.printMessages(messages, 20);
     }); // might be a different function name
     // send those messages to the output function to print them to the DOM
-    checkClearButton();
 };
 
-const checkClearButton = () => {
-    // console.log(areMessages());
-    // if(areMessages() === true){
-    //     view.enableClearMessages();
-    // } else {
-    //     view.disableClearMessages();
-    // }
-};
 
-const areMessages = () => {
-    let messages = document.getElementsByClassName("message-card");
-    console.log(messages);
-    if(messages.length > 0){
-        return true;
-    } else {
-        return false;
-    }
-};
+// const checkClearButton = () => {
+//     console.log(areMessages());
+//     if(areMessages() === true){
+//         view.enableClearMessages();
+//     } else {
+//         view.disableClearMessages();
+//     }
+// };
+
+// const areMessages = () => {
+//     let messages = document.getElementsByClassName("message-card");
+//     console.log(messages[1]);
+//     if(messages[0] !== undefined){
+//         return true;
+//     } else {
+//         return false;
+//     }
+// };
 
 // const darkThemeCheckbox = document.getElementById("dark-theme-checkbox");
 // // darkThemeCheckbox.addEventListener("");
