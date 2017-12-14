@@ -16,6 +16,13 @@ $messages-box-background-color:  lightgray;
     width: 50%;
     display: inline-grid;
     grid-template-columns: 92% 8%;
+    grid-template-rows: 15px auto;
+}
+
+.timeStamp{
+    grid-row-start: 1;
+    font-size: .7em;
+    margin-left: .5em;
 }
 
 .you {
@@ -53,11 +60,15 @@ $messages-box-background-color:  lightgray;
 
 .delete-button{
     height: 5vh;   
-    width: 2.8vw;       
+    width: 2.8vw;    
+    grid-row-start: 1;
+    grid-column-start: 2;
+    grid-row-end: span 2;
 }
 
 .message-text-paragraph {
     margin: .5em;
+    grid-row-start: 2;
 }
 
 .dropup .dropdown-menu {
