@@ -91,13 +91,19 @@ $messages-box-background-color:  lightgray;
     @include setColor(lightblue, white, pink, pink);
     button {
         color: pink;
+        border: 2px solid pink;
     }
     .you {
         float: left;
         background-color: $messages-box-background-color;
+        border: 1px solid pink;
     }
     button#clear-button{
         color: black;
+    }
+    img{
+        border-radius: 50%;
+        border: 2px solid pink;        
     }
 }
 
