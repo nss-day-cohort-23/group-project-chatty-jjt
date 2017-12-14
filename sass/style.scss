@@ -2,14 +2,15 @@
 $messages-box-background-color:  lightgray;
 
 #message-container {
-    margin-top: 75px;
+    height: 90vh;
     width: 100%;
     margin-left: 4em;
     z-index: 500 !important;
+    overflow-y: scroll;
 }
 .message-card {
     padding: 0.1em;
-    padding-left: 1em;
+    padding-left: .1em;
     margin: 0.5em;
     border-radius: 0.5em;
     width: 50%;
@@ -43,12 +44,9 @@ $messages-box-background-color:  lightgray;
     width: 99%;
 }
 
-html{
-    margin-bottom: 5em;
-}
 
 .delete-button{
-    height: 5.5vh;   
+    height: 5vh;   
     width: 2.7vw;       
 }
 
@@ -94,6 +92,14 @@ html{
 
 .light {
     @include setColor(#69d2e7, black, white, #a7dbdb);
+    .you {
+        float: left;
+        background-color: rgb(131, 131, 131);
+    }
+    .other {
+        float: right;
+        background-color: white;
+    }
 }
 
 .chups {

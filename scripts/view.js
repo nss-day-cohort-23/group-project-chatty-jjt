@@ -18,8 +18,11 @@ module.exports.printMessage = (message) => {
     
     let nameParagraph = document.createElement("p"),
     textParagraph = document.createElement("p"),
-    userNameTextNode = document.createTextNode(`${message.userName}: `),
-    contentTextNode = document.createTextNode(message.text);
+    userNameTextNode = document.createTextNode(`${message.userName}: `);
+    if(message.userName === currentUser){
+        userNameTextNode.textContent = "You:";
+    }
+    let contentTextNode = document.createTextNode(message.text);
 
     nameParagraph.setAttribute("class", "message-text-paragraph");    
     textParagraph.setAttribute("class", "message-text-paragraph");

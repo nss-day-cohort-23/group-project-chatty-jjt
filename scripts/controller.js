@@ -124,11 +124,13 @@ theme.addEventListener("click", () => {
             view.setTheme(body, themeList[prop], themeList, prop);
         }
     }
-    let messageArray = document.getElementsByClassName("message-card");
-    let lastMessageIndex = [...messageArray].length -1;
-    let lastMessage = messageArray[lastMessageIndex];
-    console.log(lastMessage);
-    lastMessage.scrollIntoView();    // why doesnt this work?
+    let messageArray = [...document.getElementsByClassName("message-card")];
+    let lastMessageIndex = messageArray.length -1;
+    let lastMessageID = messageArray[lastMessageIndex].id;
+    let slickThatOne = document.getElementById(lastMessageID);
+    console.log("id", lastMessageID);
+    console.log("element", slickThatOne);
+    slickThatOne.scrollIntoView();    // why doesnt this work?
 });
 
 module.exports.createThemeDropdown = () => {
