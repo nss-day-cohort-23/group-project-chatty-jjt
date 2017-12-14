@@ -5,7 +5,7 @@ $messages-box-background-color:  lightgray;
     margin-top: 75px;
     width: 80%;
     margin: 0 auto;
-    z-index: 500;
+    z-index: 500 !important;
 }
 .message-card {
     padding: 0.1em;
@@ -114,9 +114,9 @@ html{
 
 #logo-img{
     margin: .5em;
-    z-index: -1;
+    z-index: -1 !important;
 }
 
-#stupid{
-    z-index: -1;    
+div.fixed-top{
+    z-index: -1 !important;    
 }
