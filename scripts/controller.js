@@ -48,7 +48,6 @@ module.exports.activateListeners = () => {
     
     signInToggle.addEventListener("click", (event) => {
         if(user === ""){
-            setSignToggleText("Sign Out");
             this.login(); 
         } else {
             setSignToggleText("Sign In");
@@ -101,6 +100,7 @@ module.exports.activateListeners = () => {
 module.exports.login = () => {
     login.signIn().then(userName => {
         if(userName !== ""){
+            setSignToggleText("Sign Out");
             user = userName;
             view.setUser(user);
             this.loadMessages();
