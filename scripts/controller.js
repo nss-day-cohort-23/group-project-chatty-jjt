@@ -1,20 +1,22 @@
 "use strict";
 const view = require("./view");
 const model = require("./model");
+const firebase = require("firebase");
 const login = require("./login");
-
 
 const inputBox = document.getElementById("input-box");
 const messageContainer = document.getElementById("message-container");
 const clearButton = document.getElementById("clear-button");
 const sendButton = document.getElementById("send-button");
 const fontSizeSlider = document.getElementById("font-size-slider");
-const theme = document.getElementById("theme-dropup");
+const themeDropup = document.getElementById("theme-dropup");
 const body = document.getElementById("body");
-const signToggle = document.getElementById("signToggle");
+const signInToggle = document.getElementById("signToggle");
+
+let user = "";
 
 // Name, Class
-let themeList = {
+const themeList = {
     "Pepto-Bismal": "pepto",
     "Happy Blue": "light",
     "Moody": "dark",
@@ -22,107 +24,118 @@ let themeList = {
     "Chups": "chups"
 };
 
-let user = "";
-
 module.exports.logOut = () => {
+    view.clearMessageContainer();
     user = "";
     view.setUser(user);
 };
 
-module.exports.setUser = () => {
-    login.signIn().then(data => {
-        user = data;
-        view.setUser(user);
-        this.loadMessages();
-        document.getElementById("pleaseLogin").hidden = true;
+const setSignToggleText = (string) => {
+    signInToggle.innerText = string;
+};
+
+const tryToSaveNewMessage = () => {
+    if(user !== ""){
+        saveNewMessage();
+        toggleClearButton();
+    } else {
+        showPleaseLogin();
+    }
+};
+
+module.exports.activateListeners = () => {
+    let messageArray = document.getElementsByClassName("message-card");
+    
+    signInToggle.addEventListener("click", (event) => {
+        if(user === ""){
+            setSignToggleText("Sign Out");
+            this.login(); 
+        } else {
+            setSignToggleText("Sign In");
+            login.googleSignout(this.logOut);
+        } 
+    });
+    
+    inputBox.addEventListener("keyup", function(event) {
+        if(event.keyCode === 13){
+            tryToSaveNewMessage();
+        }
+    });
+    
+    sendButton.addEventListener("click", function(event) {
+        tryToSaveNewMessage();
+    });
+
+    messageContainer.addEventListener("click", function(event){
+        if(event.target.classList.contains("delete-button")){
+            let messageID = event.target.parentNode.id;
+            view.deleteMessage(messageID);
+            model.deleteMessage(messageID);
+        }
+    });
+    
+    clearButton.addEventListener("click", () => {
+        
+        if((messageArray !== undefined) && (!clearButton.classList.contains("disabled"))){
+            view.deleteMessages();
+            toggleClearButton();
+        }
+    });
+
+    themeDropup.addEventListener("click", () => {
+            for(let prop in themeList){
+                if(themeList[prop] === event.target.id){
+                    view.setTheme(body, themeList, themeList[prop], prop);  
+                    view.scrollToBottom();
+                }
+            }
+    });
+
+    fontSizeSlider.addEventListener("change", function(){
+        [...messageArray].forEach(element => {
+            element.style.fontSize = `${fontSizeSlider.value}em`;
+        });
     });
 };
 
-signToggle.addEventListener("click", (event) => {
-    if(user === ""){
-        event.target.innerHTML = "Sign Out";
-        this.setUser(); 
-    } else {
-        login.googleSignout();
-        event.target.innerHTML = "Sign In";
-        view.clearMessageContainer();
-    }
-       
-});
-
-inputBox.addEventListener("keyup", function(event) {
-    if(event.keyCode === 13){
-        if(user !== ""){
-            saveNewMessage();
-            checkClearButton();
-        } else {
-            showPleaseLogin();
+module.exports.login = () => {
+    login.signIn().then(userName => {
+        if(userName !== ""){
+            user = userName;
+            view.setUser(user);
+            this.loadMessages();
+            this.hidePleaseLogin();
+            listenToDatabase();
         }
-    }
-});
-
-sendButton.addEventListener("click", function(event) {
-        if(user !== ""){
-            saveNewMessage();
-            checkClearButton();
-        } else {
-            showPleaseLogin();
-        }
-});
+    });
+};
 
 const showPleaseLogin = () => {
     document.getElementById("pleaseLogin").hidden = false;
 };
 
-document.getElementById("pleaseLogin").hidden = true;
+module.exports.hidePleaseLogin = () => {
+    document.getElementById("pleaseLogin").hidden = true;
+};
 
 const saveNewMessage = () => {
     let brandNewMessage = inputBox.value;
-    if(brandNewMessage.length === 0){
-        // document.getElementById("empty-validation").toggle();
-        console.log("empty");
-    }else{
+    if(brandNewMessage.length !== 0){
         view.printMessage(model.createMessage(brandNewMessage, user));
         inputBox.value = "";
     }
-    // messageContainer.scrollTop = messageContainer.sc;
-
 };
-
-
-messageContainer.addEventListener("click", function(event){
-    if(event.target.classList.contains("delete-button")){
-        // current target's id is saved to a variable so we can pass it into these functions
-        let messageID = event.target.parentNode.id;
-        view.deleteMessage(messageID);
-        model.deleteMessage(messageID);
-    }
-});
-
-// CLEAR BUTTON
-clearButton.addEventListener("click", () => {
-    let totalMessages = document.getElementsByClassName("message-card");
-    if(totalMessages !== undefined && !clearButton.classList.contains("disabled")){
-        view.deleteMessages();
-        checkClearButton();
-    }
-});
 
 module.exports.loadMessages = function(){
-    // gather messages from the JSON file and asign them to a variable
-    let allMessages = model.loadJSON("https://nss-group-project-chatty-jjt.firebaseio.com/messages.json").then(messages => {  
-    //view.setUser(user);
+    model.loadJSON("https://nss-group-project-chatty-jjt.firebaseio.com/messages.json")
+    .then(messages => {  
         view.clearMessageContainer();
-        view.printMessages(messages, 100);
-        checkClearButton();
-        
-    }); // might be a different function name
-    // send those messages to the output function to print them to the DOM
-    // messageContainer.scrollTop = messageContainer.scrollHeight;
+        view.printMessages(messages, 20);
+        toggleClearButton(); 
+    });
 };
 
-
-const checkClearButton = () => {
+const toggleClearButton = () => {
     if(areMessages() === true){
         view.enableClearMessages();
     } else {
@@ -139,28 +152,15 @@ const areMessages = () => {
     }
 };
 
-
-theme.addEventListener("click", () => {
-
-    for(let prop in themeList){
-        if(themeList[prop] === event.target.id){
-            view.setTheme(body, themeList[prop], themeList, prop);  
-            view.scrollToBottom();
-        }
-    }
-     // why doesnt this work?
-
-    
-});
-
 module.exports.createThemeDropdown = () => {
     view.createThemeDropdown(themeList);
 };
 
-fontSizeSlider.addEventListener("change", function(){
-    let messageCards = document.getElementsByClassName("message-card");
-    [...messageCards].forEach(element => {
-        console.log(fontSizeSlider.value);
-        element.style.fontSize = `${fontSizeSlider.value}em`;
+const listenToDatabase = () => {
+    let messagesDatabase = firebase.database().ref("messages");
+    messagesDatabase.on('value', (snapshot) => {
+        let messages = model.convertObjectsToArray(snapshot.val());
+        view.clearMessageContainer();
+        view.printMessages(messages, 20);
     });
-});
+};

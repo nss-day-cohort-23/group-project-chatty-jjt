@@ -1,5 +1,20 @@
 'use strict';
 
+const convertObjectsToArray = (messageObjects) => {
+    let messagesArray = [];
+
+    for(let property in messageObjects){
+        messageObjects[property].id = property;
+        messagesArray.push(messageObjects[property]);
+    }
+
+    messagesArray.sort((a, b) => a.timestamp - b.timestamp);
+
+    return messagesArray;
+};
+
+module.exports.convertObjectsToArray = convertObjectsToArray;
+
 module.exports.loadJSON = (url) => {
     return new Promise(function (resolve, reject){
         let JSONRequest = new XMLHttpRequest();
@@ -14,19 +29,6 @@ module.exports.loadJSON = (url) => {
         JSONRequest.open("GET", url);
         JSONRequest.send();
     });
-};
-
-const convertObjectsToArray = (messageObjects) => {
-    let messagesArray = [];
-
-    for(let property in messageObjects){
-        messageObjects[property].id = property;
-        messagesArray.push(messageObjects[property]);
-    }
-
-    messagesArray.sort((a, b) => a.timestamp - b.timestamp);
-
-    return messagesArray;
 };
 
 module.exports.createMessage = (text, userName) => {
