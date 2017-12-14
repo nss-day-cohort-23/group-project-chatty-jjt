@@ -2,7 +2,10 @@
 $messages-box-background-color:  lightgray;
 
 #message-container {
-    padding-top: 75px;
+    margin-top: 75px;
+    width: 80%;
+    margin: 0 auto;
+    z-index: 500;
 }
 .message-card {
     padding: 0.1em;
@@ -61,11 +64,12 @@ html{
 }
 
 .delete-button{
-    height: 2.5em;   
+    height: 5.5vh;   
+    width: 2.7vw;       
 }
 
 .message-text-paragraph {
-    margin: .3em;
+    margin: .5em;
 }
 
 .dropup .dropdown-menu {
@@ -86,7 +90,7 @@ html{
         background-color: $nav-background-color !important;
     }
 }
-
+// the setColor function sets the colors using parameters. to make a new theme, just pass in the function and colors, like the ones below
 .dark {
     @include setColor(#67828d, white, #535d72, 	#67828d	);
     nav {
@@ -106,4 +110,13 @@ html{
 
 .light {
     @include setColor(#69d2e7, black, white, #a7dbdb);
+}
+
+#logo-img{
+    margin: .5em;
+    z-index: -1;
+}
+
+#stupid{
+    z-index: -1;    
 }
