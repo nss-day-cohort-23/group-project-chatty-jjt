@@ -32,7 +32,7 @@ module.exports.printMessage = (message) => {
     msgParagraph.setAttribute("class", "message-text-paragraph ");    
 
     let deleteButton = document.createElement("button");
-    deleteButton.setAttribute("class", "delete-button btn btn-outline-secondary");
+    deleteButton.setAttribute("class", "delete-button btn btn-outline-dark");
     let deleteText = document.createTextNode("X");
     deleteButton.appendChild(deleteText);
 
