@@ -126,34 +126,6 @@ const areMessages = () => {
     }
 };
 
-// const darkThemeCheckbox = document.getElementById("dark-theme-checkbox");
-// // darkThemeCheckbox.addEventListener("");
-// darkThemeCheckbox.addEventListener("change", function(darkThemeCheckbox){
-    
-//         // call some function that toggles css classes to TURN OFF/ON dark theme
-//         // view.toggleStyle();
-    
-// });
-
-
-fontSizeSlider.addEventListener("change", () => {
-    let selectedFontSize = fontSizeSlider.value;
-    let fontSizeClass = `font-size-${selectedFontSize}`;
-    let classListSearchString = /font-size-[0-9]/;
-    let messageCards = document.getElementsByClassName("message-card");
-    [...messageCards].forEach(element => {
-        let classList = element.classList;
-        classList.add(fontSizeClass);
-        [...classList].forEach(className => {
-            if (/font-size-[0-9]/.test(className)){
-                console.log("We're inside the true statement");
-                classList.remove(className);
-                classList.add(fontSizeClass);
-            }
-        }); 
-    });
-});
-
 
 theme.addEventListener("click", () => {
     for(let prop in themeList){
@@ -167,3 +139,10 @@ module.exports.createThemeDropdown = () => {
     view.createThemeDropdown(themeList);
 };
 
+fontSizeSlider.addEventListener("change", function(){
+    let messageCards = document.getElementsByClassName("message-card");
+    [...messageCards].forEach(element => {
+        console.log(fontSizeSlider.value);
+        element.style.fontSize = `${fontSizeSlider.value}em`;
+    });
+});
