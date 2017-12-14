@@ -10,11 +10,8 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body id="body">
-        
     <nav class="navbar navbar-light bg-light fixed-bottom">
-
         <div class="input-container">
-
             <form id="input-form" onsubmit="return false">
                 <div class="input-group">
                     <input type="text" id="input-box" class="form-control" placeholder="Text..." aria-label="Text..." aria-describedby="basic-addon2" required>
@@ -28,15 +25,14 @@
                     </div>
                     <div class="slidecontainer slider-container message-bar">
                         <p class="font-size-title">Font Size</p>
-                        <input type="range" min="1" max="4" class="slider" id="font-size-slider">
+                        <input type="range" min="0.2" max="2.2" class="slider" value="1.1" step="0.1" id="font-size-slider">
+                        
                     </div>
                 </div>
             </form>
-       
     </nav>
     <div class="container my-5">
         <div class="fixed-top top-nav">
-            <!-- <h1 class="text-center">Discombobulated Chatter</h1> -->
             <div id="stupid"><img id="logo-img" src="chattylogosmall.png"></div>
             <button  id="signOut" type="button" class="btn btn-dark mt-1 ml-1">Sign Out</button>
         </div>
