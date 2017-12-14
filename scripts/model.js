@@ -1,85 +1,33 @@
 'use strict';
 
-// // Leave out Storage
-// //require("firebase/storage");
-
-//  // GET API KEY PLEASE
-//  var config = {
-//     apiKey: "AIzaSyAPb8HQ8Cn4xxDVSX0HbmQbKlhlodAsRPQ",
-//     authDomain: "nss-group-project-chatty-jjt.firebaseapp.com",
-//     databaseURL: "https://nss-group-project-chatty-jjt.firebaseio.com",
-//     projectId: "nss-group-project-chatty-jjt",
-//     storageBucket: "nss-group-project-chatty-jjt.appspot.com",
-//     messagingSenderId: "252243494183"
-//   };
-
-//   firebase.initializeApp(config);
-
-
-
-
-let savedMessages = [
-    {
-        id: "0",
-        userName: "Joe",
-        text: "Hey guys!  Whats up?",
-        timestamp: "Tue Dec 12 2017 13:35:17 GMT-0600"
-    },
-    {
-        id: "1",
-        userName: "Jordan",
-        text: "Not much!",
-        timestamp: "Tue Dec 12 2017 13:35:17 GMT-0600"
-    },
-    {
-        id: "2",
-        userName: "Tim",
-        text: "Hi!",
-        timestamp: "Tue Dec 12 2017 13:35:17 GMT-0600"
-    },
-
-];
-
-// function messageBuilder (id, userName, text, timestamp){
-//     /* jshint ignore:start */
-//     this.id = id;
-//     this.userName = userName;
-//     this.text = text;
-//     this.timeStamp = timestamp;
-//     /* jshint ignore:end */
-// }
-
-
-// module.exports.returnSavedMessages = () => {
-//     return savedMessages;
-// };
-
 module.exports.loadJSON = (url) => {
     return new Promise(function (resolve, reject){
-        let request = new XMLHttpRequest();
-        request.addEventListener("load", () => {
-            let messagesObjects = JSON.parse(request.responseText);
-            let messagesArray = toArray(messagesObjects);
+        let JSONRequest = new XMLHttpRequest();
+        JSONRequest.addEventListener("load", () => {
+            let receivedObjects = JSON.parse(JSONRequest.responseText);
+            let messagesArray = convertObjectsToArray(receivedObjects);
             resolve(messagesArray);
         });
-        request.addEventListener("error", () => {console.log("The files weren't loaded correctly!");});
-        request.open("GET", url);
-        request.send();
+        JSONRequest.addEventListener("error", () => {
+            console.log("The files weren't loaded correctly!");
+        });
+        JSONRequest.open("GET", url);
+        JSONRequest.send();
     });
 };
 
-
-
-const toArray = (messagesObject) => {
+const convertObjectsToArray = (messageObjects) => {
     let messagesArray = [];
-    for(let prop in messagesObject){
-        messagesObject[prop].id = prop;
-        messagesArray.push(messagesObject[prop]);
+
+    for(let property in messageObjects){
+        messageObjects[property].id = property;
+        messagesArray.push(messageObjects[property]);
     }
+
     messagesArray.sort((a, b) => a.timestamp - b.timestamp);
+
     return messagesArray;
 };
-
 
 module.exports.createMessage = (text, userName) => {
     let newMessage = {
@@ -88,24 +36,21 @@ module.exports.createMessage = (text, userName) => {
         userName: userName
     };
 
-    sendMessage(newMessage);
+    saveMessage(newMessage);
+    
     return newMessage;
 };
 
-const sendMessage = (obj) => {
-    let json = JSON.stringify(obj);
-    let request = new XMLHttpRequest();
-    request.open("POST", "https://nss-group-project-chatty-jjt.firebaseio.com/messages.json");
-    request.send(json);
-};
+const saveMessage = (obj) => {
+    let jsonString = JSON.stringify(obj);
 
+    let postRequest = new XMLHttpRequest();
+    postRequest.open("POST", "https://nss-group-project-chatty-jjt.firebaseio.com/messages.json");
+    postRequest.send(jsonString);
+};
 
 module.exports.deleteMessage = (id) => {
-
-
-    let request = new XMLHttpRequest();
-    request.open("DELETE", `https://nss-group-project-chatty-jjt.firebaseio.com/messages/${id}.json`);
-    //request.setRequestHeader('Content-type','application/json; charset=utf-8');
-    request.send();
+    let deleteRequest = new XMLHttpRequest();
+    deleteRequest.open("DELETE", `https://nss-group-project-chatty-jjt.firebaseio.com/messages/${id}.json`);
+    deleteRequest.send();
 };
-
