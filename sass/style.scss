@@ -27,7 +27,14 @@ $messages-box-background-color:  lightgray;
     background-color: lightskyblue;
 }
 
-
+.fixed-top {
+    display: inline-block;
+    width: 12%;
+    text-align: center;
+    img {
+        margin: 0 auto;
+    }
+}
 .message-bar{
     padding: 0.5em;
 }
@@ -44,7 +51,6 @@ $messages-box-background-color:  lightgray;
     width: 99%;
 }
 
-
 .delete-button{
     height: 5vh;   
     width: 2.8vw;       
@@ -58,6 +64,11 @@ $messages-box-background-color:  lightgray;
     top: auto;
     bottom: 100%;
     margin-bottom: .125rem;
+}
+
+
+.no-margin-top {
+    margin-top: 1em !important;
 }
 
 @mixin setColor($body-background-color,  $font-color, $message-background-color, $nav-background-color) {
@@ -138,11 +149,6 @@ $messages-box-background-color:  lightgray;
     }
 }
 
-#logo-img{
-    margin: .5em;
-    z-index: -1 !important;
-}
-
-div.fixed-top{
-    z-index: -1 !important;    
+#message-container > :last-child {
+    margin-bottom: 2em;
 }

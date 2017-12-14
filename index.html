@@ -31,10 +31,14 @@
                 </div>
             </form>
     </nav>
-    <div class="container my-5">
+    <div class="container my-5 no-margin-top">
         <div class="fixed-top top-nav">
             <div id="stupid"><img id="logo-img" src="chattylogosmall.png"></div>
-            <button  id="signOut" type="button" class="btn btn-dark mt-1 ml-1">Sign Out</button>
+            <button  id="signToggle" type="button" class="btn btn-dark mt-1 ml-1">Sign In</button>
+            <div id="pleaseLogin" class="alert alert-danger my-1 ml-1">
+                    <strong>Please Login</strong>
+            </div>
+            <h5 id="user-Name"></h5>
         </div>
         <div id="message-container" class="messages-box"></div>
     </div>

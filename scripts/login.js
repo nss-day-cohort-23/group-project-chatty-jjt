@@ -19,7 +19,7 @@ module.exports.signIn = () => {
         let apiKey = "";
         loadAPI().then( (data) => {
             apiKey = data.key;
-                    // Initialize Firebase
+            
             let config = {
                 apiKey: apiKey,
                 authDomain: "nss-group-project-chatty-jjt.firebaseapp.com",
@@ -29,9 +29,10 @@ module.exports.signIn = () => {
                 messagingSenderId: "252243494183"
             };
 
-         
-
-            firebase.initializeApp(config);
+            // If firebase is not initialized, initialize it.
+            if(firebase.apps.length === 0){
+                firebase.initializeApp(config);
+            }
 
             var ref = firebase.database().ref("messages");
             ref.on('value', function(snapshot) {
@@ -71,10 +72,10 @@ const googleSignin = () => {
 };
 
 module.exports.googleSignout = () => {
-   firebase.auth().signOut()
-	
-   .then(function() {
+   firebase.auth().signOut().then(
+    function() {
       console.log('Signout Succesfull');
+      controller.logOut();
    }, function(error) {
       console.log('Signout Failed');
    });

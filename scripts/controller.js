@@ -11,7 +11,7 @@ const sendButton = document.getElementById("send-button");
 const fontSizeSlider = document.getElementById("font-size-slider");
 const theme = document.getElementById("theme-dropup");
 const body = document.getElementById("body");
-const signOut = document.getElementById("signOut");
+const signToggle = document.getElementById("signToggle");
 
 // Name, Class
 let themeList = {
@@ -24,18 +24,30 @@ let themeList = {
 
 let user = "";
 
+module.exports.logOut = () => {
+    user = "";
+    view.setUser(user);
+};
+
 module.exports.setUser = () => {
     login.signIn().then(data => {
         user = data;
         view.setUser(user);
         this.loadMessages();
-        this.createThemeDropdown();
+        document.getElementById("pleaseLogin").hidden = true;
     });
 };
 
-signOut.addEventListener("click", () => {
-    login.googleSignout();
-    user = "";
+signToggle.addEventListener("click", (event) => {
+    if(user === ""){
+        event.target.innerHTML = "Sign Out";
+        this.setUser(); 
+    } else {
+        login.googleSignout();
+        event.target.innerHTML = "Sign In";
+        view.clearMessageContainer();
+    }
+       
 });
 
 inputBox.addEventListener("keyup", function(event) {
@@ -43,6 +55,8 @@ inputBox.addEventListener("keyup", function(event) {
         if(user !== ""){
             saveNewMessage();
             checkClearButton();
+        } else {
+            showPleaseLogin();
         }
     }
 });
@@ -51,8 +65,16 @@ sendButton.addEventListener("click", function(event) {
         if(user !== ""){
             saveNewMessage();
             checkClearButton();
+        } else {
+            showPleaseLogin();
         }
 });
+
+const showPleaseLogin = () => {
+    document.getElementById("pleaseLogin").hidden = false;
+};
+
+document.getElementById("pleaseLogin").hidden = true;
 
 const saveNewMessage = () => {
     let brandNewMessage = inputBox.value;
@@ -91,7 +113,7 @@ module.exports.loadMessages = function(){
     let allMessages = model.loadJSON("https://nss-group-project-chatty-jjt.firebaseio.com/messages.json").then(messages => {  
     //view.setUser(user);
         view.clearMessageContainer();
-        view.printMessages(messages, 20);
+        view.printMessages(messages, 100);
         checkClearButton();
         
     }); // might be a different function name
@@ -119,18 +141,16 @@ const areMessages = () => {
 
 
 theme.addEventListener("click", () => {
+
     for(let prop in themeList){
         if(themeList[prop] === event.target.id){
-            view.setTheme(body, themeList[prop], themeList, prop);
+            view.setTheme(body, themeList[prop], themeList, prop);  
+            view.scrollToBottom();
         }
     }
-    let messageArray = [...document.getElementsByClassName("message-card")];
-    let lastMessageIndex = messageArray.length -1;
-    let lastMessageID = messageArray[lastMessageIndex].id;
-    let slickThatOne = document.getElementById(lastMessageID);
-    console.log("id", lastMessageID);
-    console.log("element", slickThatOne);
-    slickThatOne.scrollIntoView();    // why doesnt this work?
+     // why doesnt this work?
+
+    
 });
 
 module.exports.createThemeDropdown = () => {
