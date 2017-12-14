@@ -98,6 +98,7 @@ module.exports.loadMessages = function(){
     // gather messages from the JSON file and asign them to a variable
     let allMessages = model.loadJSON("https://nss-group-project-chatty-jjt.firebaseio.com/messages.json").then(messages => {  
     //view.setUser(user);
+        view.clearMessageContainer();
         view.printMessages(messages, 20);
         checkClearButton();
         
