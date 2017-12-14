@@ -16,27 +16,24 @@ module.exports.printMessage = (message) => {
     }
     messageDiv.setAttribute("id", message.id);
     
-    let nameParagraph = document.createElement("p"),
-    textParagraph = document.createElement("p"),
-    userNameTextNode = document.createTextNode(`${message.userName}: `);
+    let msgParagraph = document.createElement("p"),
+    userNameTextNode = document.createTextNode(`${message.userName}:  `);
     if(message.userName === currentUser){
-        userNameTextNode.textContent = "You:";
+        userNameTextNode.textContent = "You:  ";
     }
     let contentTextNode = document.createTextNode(message.text);
 
-    nameParagraph.setAttribute("class", "message-text-paragraph");    
-    textParagraph.setAttribute("class", "message-text-paragraph");
+    msgParagraph.setAttribute("class", "message-text-paragraph");    
 
     let deleteButton = document.createElement("button");
     deleteButton.setAttribute("class", "delete-button btn btn-outline-secondary");
     let deleteText = document.createTextNode("X");
     deleteButton.appendChild(deleteText);
 
-    nameParagraph.appendChild(userNameTextNode);
-    textParagraph.appendChild(contentTextNode);
+    msgParagraph.appendChild(userNameTextNode);
+    msgParagraph.appendChild(contentTextNode);    
 
-    messageDiv.appendChild(nameParagraph);
-    messageDiv.appendChild(textParagraph);    
+    messageDiv.appendChild(msgParagraph);
     messageDiv.appendChild(deleteButton);
     chatBox.appendChild(messageDiv);
     messageDiv.scrollIntoView();
