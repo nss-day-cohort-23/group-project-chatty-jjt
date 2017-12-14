@@ -9,6 +9,7 @@ module.exports.printMessage = (message) => {
     
     let messageDiv = document.createElement("div");
     messageDiv.classList.add("message-card");
+    
     if(message.userName === currentUser){
         messageDiv.classList.add("you");
     } else {
@@ -40,31 +41,35 @@ module.exports.printMessage = (message) => {
     messageDiv.appendChild(deleteButton);
     chatBox.appendChild(messageDiv);
     messageDiv.scrollIntoView();
-};
+};  
 
-module.exports.printMessages = (messages, ammount) => {
-    ammount = ammount > messages.length ? messages.length : ammount;
-    for(let i = 0; i < ammount; i++){
+module.exports.printMessages = (messages, amount) => {
+    
+    // If the amount is greater than length, then set the amount equal to length.
+    if(amount > messages.length){
+        amount = messages.length;
+    } else {
+        // Slice messages to only contain the last (amount) of messages
+        messages = messages.slice(messages.length-(amount-1), messages.length);
+        amount = messages.length;
+    }
+    
+    for(let i = 0; i < amount; i++){
         this.printMessage(messages[i]);
     }
 };
 
 module.exports.deleteMessage = (id) => {
-    let messageDom = document.getElementById(`${id}`);
-    messageDom.remove();
+    let messageCard = document.getElementById(`${id}`);
+    messageCard.remove();
 };
 
 module.exports.deleteMessages = () => {
-    let messageDom = document.getElementsByClassName("message-card");
-    [...messageDom].forEach(element => {
-        element.remove();
+    let messageCards = document.getElementsByClassName("message-card");
+    [...messageCards].forEach(element => {
+        this.deleteMessage(element.id);
     });
 };
-
-module.exports.toggleClass= (DOMelement, className) => {
-    DOMelement.classList.toggle(className);
-};
-
 
 module.exports.disableClearMessages = () => {
     document.getElementById("clear-button").classList.add("disabled");
@@ -80,12 +85,13 @@ module.exports.setUser = (string) =>{
 };
 
 module.exports.clearMessageContainer = () => {
-    let chatBox = document.getElementById("message-container");
-    chatBox.innerHTML = "";
+    let messageContainer = document.getElementById("message-container");
+    messageContainer.innerHTML = "";
 };
 
 module.exports.createThemeDropdown = (themeList) => {
     let dropdown = document.getElementById("dropdown-selection");
+    
     for(let prop in themeList){
         let anchor = document.createElement("a");
         anchor.setAttribute("class", "dropdown-item");
@@ -97,25 +103,23 @@ module.exports.createThemeDropdown = (themeList) => {
     }
 };
 
-const removeOtherThemes = (object, currentTheme, themeList) => {
+const removeOtherThemes = (body, currentTheme, themeList) => {
     for(let prop in themeList){
-        if(object.classList.contains(themeList[prop]) && themeList[prop] !== currentTheme){
-            object.classList.remove(themeList[prop]);
+        if(body.classList.contains(themeList[prop]) && themeList[prop] !== currentTheme){
+            body.classList.remove(themeList[prop]);
         }
     }
 };
 
-module.exports.setTheme = (object, themeClass, themeList, themeName) => {
-    removeOtherThemes(object, themeClass, themeList);
-    object.classList.add(themeClass);
-    themeDropdown.innerHTML = themeName; 
+module.exports.setTheme = (body, themeList, themeClass, themeName) => {
+    removeOtherThemes(body, themeClass, themeList);
+    body.classList.add(themeClass);
+    themeDropdown.textContent = themeName; 
 };
 
 module.exports.scrollToBottom = () => {
-    let messageArray = [...document.getElementsByClassName("message-card")];
-    let lastMessageIndex = messageArray.length -1;
-    let lastMessage = messageArray[lastMessageIndex];
-    //console.log("lastMessage", lastMessage);
-    lastMessage.scrollIntoView(); 
-    console.log(lastMessage);
+    let messageCards = [...document.getElementsByClassName("message-card")];
+    let lastMessageIndex = messageCards.length-1;
+    let lastMessage = messageCards[lastMessageIndex];
+    lastMessage.scrollIntoView();
 };
