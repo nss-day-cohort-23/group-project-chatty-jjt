@@ -6,7 +6,6 @@ const themeDropdown = document.getElementById("dropdownMenuButton");
 
 module.exports.printMessage = (message) => {
     let chatBox = document.getElementById("message-container");
-    
     let messageDiv = document.createElement("div");
     messageDiv.classList.add("message-card");
     if(message.userName === currentUser){
@@ -16,6 +15,12 @@ module.exports.printMessage = (message) => {
     }
     messageDiv.setAttribute("id", message.id);
     
+    let messageDateElement = document.createElement("p");
+    let messageDate = new Date(message.timestamp).toLocaleString();
+    let messageDateText = document.createTextNode(messageDate);
+    messageDateElement.appendChild(messageDateText);
+    messageDateElement.setAttribute("class", "timeStamp");
+
     let msgParagraph = document.createElement("p"),
     userNameTextNode = document.createTextNode(`${message.userName}:  `);
     if(message.userName === currentUser){
@@ -23,7 +28,7 @@ module.exports.printMessage = (message) => {
     }
     let contentTextNode = document.createTextNode(message.text);
 
-    msgParagraph.setAttribute("class", "message-text-paragraph");    
+    msgParagraph.setAttribute("class", "message-text-paragraph ");    
 
     let deleteButton = document.createElement("button");
     deleteButton.setAttribute("class", "delete-button btn btn-outline-secondary");
@@ -33,6 +38,7 @@ module.exports.printMessage = (message) => {
     msgParagraph.appendChild(userNameTextNode);
     msgParagraph.appendChild(contentTextNode);    
 
+    messageDiv.appendChild(messageDateElement);
     messageDiv.appendChild(msgParagraph);
     messageDiv.appendChild(deleteButton);
     chatBox.appendChild(messageDiv);
