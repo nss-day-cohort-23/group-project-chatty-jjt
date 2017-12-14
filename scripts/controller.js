@@ -34,6 +34,7 @@ module.exports.setUser = () => {
         user = data;
         view.setUser(user);
         this.loadMessages();
+        document.getElementById("pleaseLogin").hidden = true;
     });
 };
 
@@ -54,6 +55,8 @@ inputBox.addEventListener("keyup", function(event) {
         if(user !== ""){
             saveNewMessage();
             checkClearButton();
+        } else {
+            showPleaseLogin();
         }
     }
 });
@@ -62,8 +65,16 @@ sendButton.addEventListener("click", function(event) {
         if(user !== ""){
             saveNewMessage();
             checkClearButton();
+        } else {
+            showPleaseLogin();
         }
 });
+
+const showPleaseLogin = () => {
+    document.getElementById("pleaseLogin").hidden = false;
+};
+
+document.getElementById("pleaseLogin").hidden = true;
 
 const saveNewMessage = () => {
     let brandNewMessage = inputBox.value;
