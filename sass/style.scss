@@ -2,14 +2,15 @@
 $messages-box-background-color:  lightgray;
 
 #message-container {
-    margin-top: 75px;
+    height: 90vh;
     width: 100%;
     margin-left: 4em;
     z-index: 500 !important;
+    overflow-y: scroll;
 }
 .message-card {
     padding: 0.1em;
-    padding-left: 1em;
+    padding-left: .1em;
     margin: 0.5em;
     border-radius: 0.5em;
     width: 50%;
@@ -43,13 +44,10 @@ $messages-box-background-color:  lightgray;
     width: 99%;
 }
 
-html{
-    margin-bottom: 5em;
-}
 
 .delete-button{
-    height: 5.5vh;   
-    width: 2.7vw;       
+    height: 5vh;   
+    width: 2.8vw;       
 }
 
 .message-text-paragraph {
@@ -83,31 +81,60 @@ html{
             border-color: black;
         }
     }
+    .you {
+        float: left;
+        background-color: $messages-box-background-color;
+    }
 }
 
 .pepto {
     @include setColor(lightblue, white, pink, pink);
-    h1 {
+    button {
         color: pink;
+        border: 2px solid pink;
+    }
+    .you {
+        float: left;
+        background-color: $messages-box-background-color;
+        border: 1px solid pink;
+    }
+    button#clear-button{
+        color: black;
+    }
+    img{
+        border-radius: 50%;
+        border: 2px solid pink;        
     }
 }
 
 .light {
     @include setColor(#69d2e7, black, white, #a7dbdb);
+    .you {
+        float: left;
+        background-color: $messages-box-background-color;
+    }
+    .other {
+        float: right;
+        background-color: white;
+    }
 }
 
 .chups {
-    @include setColor(black, white, cornflowerblue, cornflowerblue);
+    @include setColor(black, black, cornflowerblue, cornflowerblue);
     h1{
         color: white;
     }
     .you {
         float: left;
-        background-color: rgb(131, 131, 131);
+        background-color:$messages-box-background-color;
     }
     .other {
         float: right;
         background-color: cornflowerblue;
+    }
+    img{
+        border-radius: 50%;
+        border: 1px solid white;
     }
 }
 
