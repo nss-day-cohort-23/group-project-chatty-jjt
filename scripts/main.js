@@ -1,8 +1,8 @@
 "use strict";
 const controller = require("./controller");
 
-controller.setUser();
-
+//controller.setUser();
+controller.createThemeDropdown();
 
 
 

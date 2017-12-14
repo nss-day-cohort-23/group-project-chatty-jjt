@@ -11,7 +11,7 @@ const sendButton = document.getElementById("send-button");
 const fontSizeSlider = document.getElementById("font-size-slider");
 const theme = document.getElementById("theme-dropup");
 const body = document.getElementById("body");
-const signOut = document.getElementById("signOut");
+const signToggle = document.getElementById("signToggle");
 
 // Name, Class
 let themeList = {
@@ -24,18 +24,29 @@ let themeList = {
 
 let user = "";
 
+module.exports.logOut = () => {
+    user = "";
+    view.setUser(user);
+};
+
 module.exports.setUser = () => {
     login.signIn().then(data => {
         user = data;
         view.setUser(user);
         this.loadMessages();
-        this.createThemeDropdown();
     });
 };
 
-signOut.addEventListener("click", () => {
-    login.googleSignout();
-    user = "";
+signToggle.addEventListener("click", (event) => {
+    if(user === ""){
+        event.target.innerHTML = "Sign Out";
+        this.setUser(); 
+    } else {
+        login.googleSignout();
+        event.target.innerHTML = "Sign In";
+        view.clearMessageContainer();
+    }
+       
 });
 
 inputBox.addEventListener("keyup", function(event) {

@@ -73,6 +73,7 @@ module.exports.enableClearMessages = () => {
 
 module.exports.setUser = (string) =>{
     currentUser = string;
+    document.getElementById("user-Name").innerHTML = string;
 };
 
 module.exports.clearMessageContainer = () => {

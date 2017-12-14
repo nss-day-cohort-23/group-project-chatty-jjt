@@ -27,7 +27,14 @@ $messages-box-background-color:  lightgray;
     background-color: lightskyblue;
 }
 
-
+.fixed-top {
+    display: inline-block;
+    width: 12%;
+    text-align: center;
+    img {
+        margin: 0 auto;
+    }
+}
 .message-bar{
     padding: 0.5em;
 }
@@ -111,13 +118,4 @@ $messages-box-background-color:  lightgray;
         float: right;
         background-color: cornflowerblue;
     }
-}
-
-#logo-img{
-    margin: .5em;
-    z-index: -1 !important;
-}
-
-div.fixed-top{
-    z-index: -1 !important;    
 }
