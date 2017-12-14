@@ -114,7 +114,7 @@ const removeOtherThemes = (body, currentTheme, themeList) => {
 module.exports.setTheme = (body, themeList, themeClass, themeName) => {
     removeOtherThemes(body, themeClass, themeList);
     body.classList.add(themeClass);
-    themeDropdown.textContent = themeName; 
+    themeDropdown.innerText = themeName; 
 };
 
 module.exports.scrollToBottom = () => {
