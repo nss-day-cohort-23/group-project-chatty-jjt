@@ -6,9 +6,6 @@ const themeDropdown = document.getElementById("dropdownMenuButton");
 
 module.exports.printMessage = (message) => {
     let chatBox = document.getElementById("message-container");
-    console.log(message);
-    // let testDate = new Date();
-    // console.log(testDate);
     let messageDiv = document.createElement("div");
     messageDiv.classList.add("message-card");
     if(message.userName === currentUser){
@@ -20,7 +17,6 @@ module.exports.printMessage = (message) => {
     
     let messageDateElement = document.createElement("p");
     let messageDate = new Date(message.timestamp).toLocaleString();
-    console.log(messageDate);
     let messageDateText = document.createTextNode(messageDate);
     messageDateElement.appendChild(messageDateText);
     messageDateElement.setAttribute("class", "timeStamp");
