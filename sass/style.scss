@@ -119,3 +119,7 @@ $messages-box-background-color:  lightgray;
         background-color: cornflowerblue;
     }
 }
+
+#message-container > :last-child {
+    margin-bottom: 2em;
+}
