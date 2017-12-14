@@ -2,10 +2,11 @@
 $messages-box-background-color:  lightgray;
 
 #message-container {
-    margin-top: 75px;
+    height: 90vh;
     width: 100%;
     margin-left: 4em;
     z-index: 500 !important;
+    overflow-y: scroll;
 }
 .message-card {
     padding: 0.1em;
@@ -43,10 +44,6 @@ $messages-box-background-color:  lightgray;
     width: 99%;
 }
 
-html{
-    margin-bottom: 5em;
-}
-
 .delete-button{
     height: 5.5vh;   
     width: 2.7vw;       
@@ -60,6 +57,11 @@ html{
     top: auto;
     bottom: 100%;
     margin-bottom: .125rem;
+}
+
+
+.no-margin-top {
+    margin-top: 1em !important;
 }
 
 @mixin setColor($body-background-color,  $font-color, $message-background-color, $nav-background-color) {

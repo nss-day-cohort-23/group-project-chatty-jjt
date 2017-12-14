@@ -42,7 +42,7 @@ module.exports.printMessage = (message) => {
 module.exports.printMessages = (messages, ammount) => {
     ammount = ammount > messages.length ? messages.length : ammount;
     for(let i = 0; i < ammount; i++){
-            this.printMessage(messages[i]);
+        this.printMessage(messages[i]);
     }
 };
 
@@ -104,6 +104,14 @@ const removeOtherThemes = (object, currentTheme, themeList) => {
 module.exports.setTheme = (object, themeClass, themeList, themeName) => {
     removeOtherThemes(object, themeClass, themeList);
     object.classList.add(themeClass);
-    themeDropdown.innerHTML = themeName;
+    themeDropdown.innerHTML = themeName; 
 };
 
+module.exports.scrollToBottom = () => {
+    let messageArray = [...document.getElementsByClassName("message-card")];
+    let lastMessageIndex = messageArray.length -1;
+    let lastMessage = messageArray[lastMessageIndex];
+    //console.log("lastMessage", lastMessage);
+    lastMessage.scrollIntoView(); 
+    console.log(lastMessage);
+};

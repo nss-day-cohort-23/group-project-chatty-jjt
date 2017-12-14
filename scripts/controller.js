@@ -119,16 +119,16 @@ const areMessages = () => {
 
 
 theme.addEventListener("click", () => {
+
     for(let prop in themeList){
         if(themeList[prop] === event.target.id){
-            view.setTheme(body, themeList[prop], themeList, prop);
+            view.setTheme(body, themeList[prop], themeList, prop);  
+            view.scrollToBottom();
         }
     }
-    let messageArray = document.getElementsByClassName("message-card");
-    let lastMessageIndex = [...messageArray].length -1;
-    let lastMessage = messageArray[lastMessageIndex];
-    console.log(lastMessage);
-    lastMessage.scrollIntoView();    // why doesnt this work?
+     // why doesnt this work?
+
+    
 });
 
 module.exports.createThemeDropdown = () => {
