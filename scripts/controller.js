@@ -18,7 +18,8 @@ let themeList = {
     "Pepto-Bismal": "pepto",
     "Happy Blue": "light",
     "Moody": "dark",
-    "Normal": "normal"
+    "Normal": "normal",
+    "Chups": "chups"
 };
 
 let user = "";
@@ -71,19 +72,10 @@ messageContainer.addEventListener("click", function(event){
     if(event.target.classList.contains("delete-button")){
         // current target's id is saved to a variable so we can pass it into these functions
         let messageID = event.target.parentNode.id;
-
-        // execute deleteMessagefromDOM function
-        // view.clearMessages
-
-        // execute deleteMessageFromJSON function
-        // model.clearMessages
-
         view.deleteMessage(messageID);
         model.deleteMessage(messageID);
     }
 });
-
-
 
 // CLEAR BUTTON
 clearButton.addEventListener("click", () => {
@@ -105,7 +97,6 @@ module.exports.loadMessages = function(){
     }); // might be a different function name
     // send those messages to the output function to print them to the DOM
     // messageContainer.scrollTop = messageContainer.scrollHeight;
-
 };
 
 
@@ -133,6 +124,11 @@ theme.addEventListener("click", () => {
             view.setTheme(body, themeList[prop], themeList, prop);
         }
     }
+    let messageArray = document.getElementsByClassName("message-card");
+    let lastMessageIndex = [...messageArray].length -1;
+    let lastMessage = messageArray[lastMessageIndex];
+    console.log(lastMessage);
+    lastMessage.scrollIntoView();    // why doesnt this work?
 });
 
 module.exports.createThemeDropdown = () => {

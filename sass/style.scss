@@ -96,6 +96,21 @@ html{
     @include setColor(#69d2e7, black, white, #a7dbdb);
 }
 
+.chups {
+    @include setColor(black, white, cornflowerblue, cornflowerblue);
+    h1{
+        color: white;
+    }
+    .you {
+        float: left;
+        background-color: rgb(131, 131, 131);
+    }
+    .other {
+        float: right;
+        background-color: cornflowerblue;
+    }
+}
+
 #logo-img{
     margin: .5em;
     z-index: -1 !important;
