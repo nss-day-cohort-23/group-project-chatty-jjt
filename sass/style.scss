@@ -51,10 +51,8 @@ $messages-box-background-color:  lightgray;
     margin: auto;
 }
 
-.input-form {
-    width: 99%;
-}
-.input-container{
+.input-form,
+.input-container {
     width: 99%;
 }
 
@@ -76,8 +74,6 @@ $messages-box-background-color:  lightgray;
     bottom: 100%;
     margin-bottom: .125rem;
 }
-
-
 .no-margin-top {
     margin-top: 1em !important;
 }
