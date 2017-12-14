@@ -47,7 +47,7 @@ $messages-box-background-color:  lightgray;
 
 .delete-button{
     height: 5vh;   
-    width: 2.7vw;       
+    width: 2.8vw;       
 }
 
 .message-text-paragraph {
@@ -81,12 +81,23 @@ $messages-box-background-color:  lightgray;
             border-color: black;
         }
     }
+    .you {
+        float: left;
+        background-color: $messages-box-background-color;
+    }
 }
 
 .pepto {
     @include setColor(lightblue, white, pink, pink);
-    h1 {
+    button {
         color: pink;
+    }
+    .you {
+        float: left;
+        background-color: $messages-box-background-color;
+    }
+    button#clear-button{
+        color: black;
     }
 }
 
@@ -94,7 +105,7 @@ $messages-box-background-color:  lightgray;
     @include setColor(#69d2e7, black, white, #a7dbdb);
     .you {
         float: left;
-        background-color: rgb(131, 131, 131);
+        background-color: $messages-box-background-color;
     }
     .other {
         float: right;
@@ -103,17 +114,21 @@ $messages-box-background-color:  lightgray;
 }
 
 .chups {
-    @include setColor(black, white, cornflowerblue, cornflowerblue);
+    @include setColor(black, black, cornflowerblue, cornflowerblue);
     h1{
         color: white;
     }
     .you {
         float: left;
-        background-color: rgb(131, 131, 131);
+        background-color:$messages-box-background-color;
     }
     .other {
         float: right;
         background-color: cornflowerblue;
+    }
+    img{
+        border-radius: 50%;
+        border: 1px solid white;
     }
 }
 
