@@ -113,7 +113,7 @@ module.exports.loadMessages = function(){
     let allMessages = model.loadJSON("https://nss-group-project-chatty-jjt.firebaseio.com/messages.json").then(messages => {  
     //view.setUser(user);
         view.clearMessageContainer();
-        view.printMessages(messages, 20);
+        view.printMessages(messages, 100);
         checkClearButton();
         
     }); // might be a different function name
