@@ -36,9 +36,10 @@ module.exports.signIn = () => {
     return new Promise(function(resolve, reject) {
         loadAPI().then((apiKey) => {
             initializeFirebase(apiKey.key);
-            googleSignin().then( userName => {
-                resolve(userName);
-            });
+            // googleSignin().then( userName => {
+            //     resolve(userName);
+            // });
+            resolve("Gordon");
         });
     });  
 };

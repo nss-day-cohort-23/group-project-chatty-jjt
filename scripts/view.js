@@ -5,45 +5,30 @@ let currentUser = "";
 const themeDropdown = document.getElementById("dropdownMenuButton");
 
 module.exports.printMessage = (message) => {
-    let chatBox = document.getElementById("message-container");
-    let messageDiv = document.createElement("div");
-    messageDiv.classList.add("message-card");
+    
+    let chatBox = $("#message-container");
+    let messageDiv = $("<div></div>").addClass("message-card").attr("id", `${message.id}`);
+    // let messageDiv = document.createElement("div");
+    // messageDiv.classList.add("message-card");
     
     if(message.userName === currentUser){
-        messageDiv.classList.add("you");
+        messageDiv.addClass("you");
     } else {
-        messageDiv.classList.add("other");
+        messageDiv.addClass("other");
     }
-    messageDiv.setAttribute("id", message.id);
     
-    let messageDateElement = document.createElement("p");
-    let messageDate = new Date(message.timestamp).toLocaleString();
-    let messageDateText = document.createTextNode(messageDate);
-    messageDateElement.appendChild(messageDateText);
-    messageDateElement.setAttribute("class", "timeStamp");
-
-    let msgParagraph = document.createElement("p"),
-    userNameTextNode = document.createTextNode(`${message.userName}:  `);
+    $(`<p>${new Date(message.timestamp).toLocaleString()}</p>`).addClass("timeStamp").appendTo(messageDiv);
+    let messageTextPara = $(`<p></p>`).addClass("message-text-paragraph").appendTo(messageDiv);
+    let userName = $(`<span>${message.userName}: </span>`).appendTo(messageTextPara);
+    $(`<span>${message.text}</span>`).appendTo(messageTextPara);
+    $(`<button>X</button>`).addClass("delete-button btn btn-outline-dark").appendTo(messageDiv);
+     
     if(message.userName === currentUser){
-        userNameTextNode.textContent = "You:  ";
+        userName.text("You: ");
     }
-    let contentTextNode = document.createTextNode(message.text);
-
-    msgParagraph.setAttribute("class", "message-text-paragraph ");    
-
-    let deleteButton = document.createElement("button");
-    deleteButton.setAttribute("class", "delete-button btn btn-outline-dark");
-    let deleteText = document.createTextNode("X");
-    deleteButton.appendChild(deleteText);
-
-    msgParagraph.appendChild(userNameTextNode);
-    msgParagraph.appendChild(contentTextNode);    
-
-    messageDiv.appendChild(messageDateElement);
-    messageDiv.appendChild(msgParagraph);
-    messageDiv.appendChild(deleteButton);
-    chatBox.appendChild(messageDiv);
-    messageDiv.scrollIntoView();
+      
+    messageDiv.appendTo(chatBox);
+    messageDiv[0].scrollIntoView();
 };  
 
 module.exports.printMessages = (messages, amount) => {
@@ -63,46 +48,35 @@ module.exports.printMessages = (messages, amount) => {
 };
 
 module.exports.deleteMessage = (id) => {
-    let messageCard = document.getElementById(`${id}`);
-    messageCard.remove();
+    $(`#${id}`).remove();
 };
 
 module.exports.deleteMessages = () => {
-    let messageCards = document.getElementsByClassName("message-card");
-    [...messageCards].forEach(element => {
-        this.deleteMessage(element.id);
-    });
+    $(".message-card").remove();
 };
 
 module.exports.disableClearMessages = () => {
-    document.getElementById("clear-button").classList.add("disabled");
+    $("#clear-button").addClass("disabled");
 };
 
 module.exports.enableClearMessages = () => {
-    document.getElementById("clear-button").classList.remove("disabled");
+    $("#clear-button").removeClass("disabled");
 };
 
 module.exports.setUser = (string) =>{
     currentUser = string;
-    document.getElementById("user-Name").innerHTML = string;
+    $("#user-Name").text(string);
 };
 
 module.exports.clearMessageContainer = () => {
-    let messageContainer = document.getElementById("message-container");
-    messageContainer.innerHTML = "";
+    $("#message-container").text("");
 };
 
-module.exports.createThemeDropdown = (themeList) => {
-    let dropdown = document.getElementById("dropdown-selection");
+module.exports.createThemeDropdown = function(themeList) {
+    // let dropdown = $("#dropdown-selection");
     
     for(let prop in themeList){
-        let anchor = document.createElement("a");
-        anchor.setAttribute("class", "dropdown-item");
-        anchor.setAttribute("id", themeList[prop]);
-        anchor.setAttribute("href", "#");
-        let anchorText = document.createTextNode(prop);
-        anchor.appendChild(anchorText);
-        dropdown.appendChild(anchor);
+        $("<a></a>").text(prop).addClass("dropdown-item").attr("id", themeList[prop]).attr("href", "#").appendTo($("#dropdown-selection"));
     }
 };
 
@@ -121,8 +95,5 @@ module.exports.setTheme = (body, themeList, themeClass, themeName) => {
 };
 
 module.exports.scrollToBottom = () => {
-    let messageCards = [...document.getElementsByClassName("message-card")];
-    let lastMessageIndex = messageCards.length-1;
-    let lastMessage = messageCards[lastMessageIndex];
-    lastMessage.scrollIntoView();
+    $("#message-container").scrollTop($("#message-container")[0].scrollHeight);
 };
