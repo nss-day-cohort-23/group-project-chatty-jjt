@@ -4,14 +4,14 @@ const model = require("./model");
 const firebase = require("firebase");
 const login = require("./login");
 
-const inputBox = document.getElementById("input-box");
-const messageContainer = document.getElementById("message-container");
-const clearButton = document.getElementById("clear-button");
-const sendButton = document.getElementById("send-button");
-const fontSizeSlider = document.getElementById("font-size-slider");
-const themeDropup = document.getElementById("theme-dropup");
-const body = document.getElementById("body");
-const signInToggle = document.getElementById("signToggle");
+const inputBox = $("#input-box");
+const messageContainer = $("#message-container");
+const clearButton = $("#clear-button");
+const sendButton = $("#send-button");
+const fontSizeSlider = $("#font-size-slider");
+const themeDropup = $("#theme-dropup");
+const body = $("#body");
+const signInToggle = $("#signToggle");
 
 let user = "";
 
@@ -44,9 +44,13 @@ const tryToSaveNewMessage = () => {
 };
 
 module.exports.activateListeners = () => {
-    let messageArray = document.getElementsByClassName("message-card");
+    // let messageArray = document.getElementsByClassName("message-card");
+    // let messageArray2 = $.makeArray($(".message-card"));
+    let messageArray = $(".message-card");
+
+    console.log("messageArray2", messageArray);
     
-    signInToggle.addEventListener("click", (event) => {
+    signInToggle.on("click", (event) => {
         if(user === ""){
             this.login(); 
         } else {
@@ -55,33 +59,33 @@ module.exports.activateListeners = () => {
         } 
     });
     
-    inputBox.addEventListener("keyup", function(event) {
+    inputBox.on("keyup", function(event) {
         if(event.keyCode === 13){
             tryToSaveNewMessage();
         }
     });
     
-    sendButton.addEventListener("click", function(event) {
+    sendButton.on("click", function(event) {
         tryToSaveNewMessage();
     });
 
-    messageContainer.addEventListener("click", function(event){
-        if(event.target.classList.contains("delete-button")){
+    messageContainer.on("click", function(event){
+        if($(event.target).hasClass("delete-button")){
             let messageID = event.target.parentNode.id;
             view.deleteMessage(messageID);
             model.deleteMessage(messageID);
         }
     });
     
-    clearButton.addEventListener("click", () => {
+    clearButton.on("click", () => {
         
-        if((messageArray !== undefined) && (!clearButton.classList.contains("disabled"))){
+        if((messageArray !== undefined) && (!clearButton.hasClass("disabled"))){
             view.deleteMessages();
             toggleClearButton();
         }
     });
 
-    themeDropup.addEventListener("click", () => {
+    themeDropup.on("click", () => {
             for(let prop in themeList){
                 if(themeList[prop] === event.target.id){
                     view.setTheme(body, themeList, themeList[prop], prop);  
@@ -90,8 +94,8 @@ module.exports.activateListeners = () => {
             }
     });
 
-    fontSizeSlider.addEventListener("change", function(){
-        [...messageArray].forEach(element => {
+    fontSizeSlider.on("change", function(){
+        messageArray.forEach(element => {
             element.style.fontSize = `${fontSizeSlider.value}em`;
         });
     });
@@ -119,10 +123,10 @@ module.exports.hidePleaseLogin = () => {
 };
 
 const saveNewMessage = () => {
-    let brandNewMessage = inputBox.value;
+    let brandNewMessage = inputBox.val();
     if(brandNewMessage.length !== 0){
         view.printMessage(model.createMessage(brandNewMessage, user));
-        inputBox.value = "";
+        inputBox.val("");
     }
 };
 

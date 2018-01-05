@@ -4,15 +4,12 @@ let provider = new firebase.auth.GoogleAuthProvider();
 
 const loadAPI = () => {
     return new Promise(function (resolve, reject){
-        let apiRequest = new XMLHttpRequest();
-        apiRequest.addEventListener("load", () => {
-            resolve(JSON.parse(apiRequest.responseText));
+        $.ajax({
+            url: "../scripts/apiKey.json"
+        }).done((key) =>{
+            console.log('key: ',key);
+            resolve(key);
         });
-        apiRequest.addEventListener("error", () => {
-            console.log("The files weren't loaded correctly!");
-        });
-        apiRequest.open("GET", "../scripts/apiKey.json");
-        apiRequest.send();
     });
 };
 
@@ -39,7 +36,7 @@ module.exports.signIn = () => {
             // googleSignin().then( userName => {
             //     resolve(userName);
             // });
-            resolve("Gordon");
+            resolve("Joe");
         });
     });  
 };
