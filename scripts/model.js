@@ -17,18 +17,27 @@ module.exports.convertObjectsToArray = convertObjectsToArray;
 
 module.exports.loadJSON = (url) => {
     return new Promise(function (resolve, reject){
-        let JSONRequest = new XMLHttpRequest();
-        JSONRequest.addEventListener("load", () => {
-            let receivedObjects = JSON.parse(JSONRequest.responseText);
-            let messagesArray = convertObjectsToArray(receivedObjects);
+        // let JSONRequest = new XMLHttpRequest();
+        // JSONRequest.addEventListener("load", () => {
+        //     let receivedObjects = JSON.parse(JSONRequest.responseText);
+        //     let messagesArray = convertObjectsToArray(receivedObjects);
+        //     resolve(messagesArray);
+        // });
+        // JSONRequest.addEventListener("error", () => {
+        //     console.log("The files weren't loaded correctly!");
+        // });
+        // JSONRequest.open("GET", url);
+        // JSONRequest.send();
+
+        $.ajax({
+            url:`${url}`
+        }).done((dataObject) =>{
+            console.log('dataObject', dataObject);
+            let messagesArray = convertObjectsToArray(dataObject);
             resolve(messagesArray);
         });
-        JSONRequest.addEventListener("error", () => {
-            console.log("The files weren't loaded correctly!");
-        });
-        JSONRequest.open("GET", url);
-        JSONRequest.send();
     });
+
 };
 
 module.exports.createMessage = (text, userName) => {
