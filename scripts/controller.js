@@ -44,11 +44,11 @@ const tryToSaveNewMessage = () => {
 };
 
 module.exports.activateListeners = () => {
-    // let messageArray = document.getElementsByClassName("message-card");
+    let messageArray = document.getElementsByClassName("message-card");
     // let messageArray2 = $.makeArray($(".message-card"));
-    let messageArray = $(".message-card");
+    // let messageArray = $(".message-card").toArray();
 
-    console.log("messageArray2", messageArray);
+    console.log("messageArray", messageArray);
     
     signInToggle.on("click", (event) => {
         if(user === ""){
@@ -78,7 +78,6 @@ module.exports.activateListeners = () => {
     });
     
     clearButton.on("click", () => {
-        
         if((messageArray !== undefined) && (!clearButton.hasClass("disabled"))){
             view.deleteMessages();
             toggleClearButton();
@@ -95,7 +94,9 @@ module.exports.activateListeners = () => {
     });
 
     fontSizeSlider.on("change", function(){
-        messageArray.forEach(element => {
+        console.log("messageArray2", messageArray);
+        [...messageArray].forEach(element => {
+            
             element.style.fontSize = `${fontSizeSlider.value}em`;
         });
     });
